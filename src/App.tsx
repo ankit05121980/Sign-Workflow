@@ -32,6 +32,22 @@ import {
   Lock,
   Globe,
   GitBranch,
+  ChevronDown,
+  Save,
+  DollarSign,
+  Package,
+  TrendingUp,
+  Briefcase,
+  FileCheck,
+  Truck,
+  Database,
+  ClipboardCheck,
+  Building2,
+  ShoppingCart,
+  Landmark,
+  AlertTriangle,
+  Calculator,
+  Warehouse,
 } from 'lucide-react';
 import {
   BarChart,
@@ -50,6 +66,136 @@ import {
   Area,
   AreaChart,
 } from 'recharts';
+
+// ============================================================
+// DATA & CONFIGURATION
+// ============================================================
+
+// ENTERPRISE MODULES CONFIGURATION
+const ENTERPRISE_MODULES = [
+  {
+    id: 'approvals',
+    name: 'Approval Workflows',
+    desc: 'Automated approval routing and digital signatures',
+    icon: CheckCircle,
+    color: '#3b82f6',
+    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    available: true,
+    stats: { active: 142, pending: 23, rate: '98%' },
+  },
+  {
+    id: 'procurement',
+    name: 'Procurement Management',
+    desc: 'Purchase orders, requisitions, and vendor management',
+    icon: ShoppingCart,
+    color: '#10b981',
+    gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    available: false,
+    stats: { active: 567, pending: 89, rate: '96%' },
+  },
+  {
+    id: 'financial',
+    name: 'Financial Management',
+    desc: 'Accounting, budgeting, and financial reporting',
+    icon: DollarSign,
+    color: '#f59e0b',
+    gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    available: false,
+    stats: { active: 892, pending: 156, rate: '94%' },
+  },
+  {
+    id: 'hr',
+    name: 'Human Resources',
+    desc: 'Employee management, payroll, and benefits',
+    icon: Users,
+    color: '#8b5cf6',
+    gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+    available: false,
+    stats: { active: 1245, pending: 67, rate: '99%' },
+  },
+  {
+    id: 'supply-chain',
+    name: 'Supply Chain',
+    desc: 'Logistics, inventory, and warehouse management',
+    icon: Truck,
+    color: '#06b6d4',
+    gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+    available: false,
+    stats: { active: 678, pending: 124, rate: '91%' },
+  },
+  {
+    id: 'contracts',
+    name: 'Contract Lifecycle',
+    desc: 'Contract creation, negotiation, and compliance',
+    icon: FileCheck,
+    color: '#ec4899',
+    gradient: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+    available: false,
+    stats: { active: 234, pending: 45, rate: '97%' },
+  },
+  {
+    id: 'assets',
+    name: 'Asset Management',
+    desc: 'Track and manage physical and digital assets',
+    icon: Database,
+    color: '#14b8a6',
+    gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+    available: false,
+    stats: { active: 1567, pending: 234, rate: '93%' },
+  },
+  {
+    id: 'bi',
+    name: 'Business Intelligence',
+    desc: 'Analytics, dashboards, and predictive insights',
+    icon: TrendingUp,
+    color: '#f43f5e',
+    gradient: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+    available: false,
+    stats: { active: 456, pending: 0, rate: '100%' },
+  },
+  {
+    id: 'compliance',
+    name: 'Compliance & Audit',
+    desc: 'Regulatory compliance and audit trails',
+    icon: Shield,
+    color: '#ef4444',
+    gradient: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+    available: false,
+    stats: { active: 89, pending: 12, rate: '95%' },
+  },
+  {
+    id: 'documents',
+    name: 'Document Management',
+    desc: 'Centralized document storage and collaboration',
+    icon: Folder,
+    color: '#84cc16',
+    gradient: 'linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)',
+    available: false,
+    stats: { active: 3456, pending: 567, rate: '89%' },
+  },
+  {
+    id: 'vendors',
+    name: 'Vendor Management',
+    desc: 'Vendor onboarding, performance, and payments',
+    icon: Briefcase,
+    color: '#a855f7',
+    gradient: 'linear-gradient(135deg, #f77062 0%, #fe5196 100%)',
+    available: false,
+    stats: { active: 789, pending: 145, rate: '92%' },
+  },
+  {
+    id: 'inventory',
+    name: 'Inventory Control',
+    desc: 'Real-time inventory tracking and optimization',
+    icon: Package,
+    color: '#0ea5e9',
+    gradient: 'linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%)',
+    available: false,
+    stats: { active: 2345, pending: 456, rate: '88%' },
+  },
+];
+
+// 15 ENTERPRISE USERS
 const U = [
   {
     id: '1',
@@ -57,7 +203,7 @@ const U = [
     email: 'sarah.j@massy.com',
     role: 'approver',
     dept: 'Finance',
-    title: 'Finance Mgr',
+    title: 'Finance Manager',
     status: 'active',
   },
   {
@@ -75,7 +221,7 @@ const U = [
     email: 'david.p@massy.com',
     role: 'approver',
     dept: 'Marketing',
-    title: 'Mktg Director',
+    title: 'Marketing Director',
     status: 'active',
   },
   {
@@ -120,18 +266,83 @@ const U = [
     email: 'lisa.a@massy.com',
     role: 'requester',
     dept: 'Marketing',
-    title: 'Mktg Coordinator',
-    status: 'inactive',
+    title: 'Marketing Coordinator',
+    status: 'active',
+  },
+  {
+    id: '9',
+    name: 'James Taylor',
+    email: 'james.t@massy.com',
+    role: 'approver',
+    dept: 'Legal',
+    title: 'Legal Counsel',
+    status: 'active',
+  },
+  {
+    id: '10',
+    name: 'Emma Davis',
+    email: 'emma.d@massy.com',
+    role: 'approver',
+    dept: 'IT',
+    title: 'CTO',
+    status: 'active',
+  },
+  {
+    id: '11',
+    name: 'Ryan Martinez',
+    email: 'ryan.m@massy.com',
+    role: 'requester',
+    dept: 'Operations',
+    title: 'Operations Analyst',
+    status: 'active',
+  },
+  {
+    id: '12',
+    name: 'Sophie Brown',
+    email: 'sophie.b@massy.com',
+    role: 'approver',
+    dept: 'HR',
+    title: 'VP Human Resources',
+    status: 'active',
+  },
+  {
+    id: '13',
+    name: 'Oliver White',
+    email: 'oliver.w@massy.com',
+    role: 'requester',
+    dept: 'Finance',
+    title: 'Financial Analyst',
+    status: 'active',
+  },
+  {
+    id: '14',
+    name: 'Ava Thompson',
+    email: 'ava.t@massy.com',
+    role: 'approver',
+    dept: 'Procurement',
+    title: 'Chief Procurement Officer',
+    status: 'active',
+  },
+  {
+    id: '15',
+    name: 'Ethan Clark',
+    email: 'ethan.c@massy.com',
+    role: 'requester',
+    dept: 'Legal',
+    title: 'Compliance Officer',
+    status: 'active',
   },
 ];
-const WF = [
+
+// 8 EDITABLE WORKFLOWS
+const INITIAL_WORKFLOWS = [
   {
     id: 'w1',
     name: 'GRN Approval',
-    desc: 'Goods verification with finance/ops sign-off',
+    desc: 'Goods Receipt Note verification with finance and operations sign-off',
     steps: [
-      { r: 'Finance Mgr', a: 'Budget', s: '24h' },
-      { r: 'VP Ops', a: 'Approve', s: '48h' },
+      { r: 'Finance Manager', a: 'Budget Check', s: '24h' },
+      { r: 'VP Operations', a: 'Quality Approval', s: '48h' },
     ],
     dt: 'GRN',
     on: 1,
@@ -141,11 +352,11 @@ const WF = [
   {
     id: 'w2',
     name: 'Purchase Order',
-    desc: 'Budget check + executive sign-off',
+    desc: 'Multi-level PO approval with budget check and executive sign-off',
     steps: [
-      { r: 'Finance Mgr', a: 'Budget', s: '48h' },
-      { r: 'Dept Head', a: 'Auth', s: '48h' },
-      { r: 'CFO', a: '>$10k', s: '72h' },
+      { r: 'Finance Manager', a: 'Budget Verification', s: '48h' },
+      { r: 'Department Head', a: 'Authorization', s: '48h' },
+      { r: 'CFO', a: 'Final Approval (>$10k)', s: '72h' },
     ],
     dt: 'Purchase Order',
     on: 1,
@@ -155,10 +366,10 @@ const WF = [
   {
     id: 'w3',
     name: 'Leave Request',
-    desc: 'Manager + HR review',
+    desc: 'Employee leave approval through manager and HR review',
     steps: [
-      { r: 'Manager', a: 'Review', s: '24h' },
-      { r: 'HR', a: 'Policy', s: '48h' },
+      { r: 'Direct Manager', a: 'Team Review', s: '24h' },
+      { r: 'HR Director', a: 'Policy Compliance', s: '48h' },
     ],
     dt: 'Leave Request',
     on: 1,
@@ -168,11 +379,11 @@ const WF = [
   {
     id: 'w4',
     name: 'Expense Report',
-    desc: 'Receipt validation + approval',
+    desc: 'Employee expense reimbursement with receipt validation',
     steps: [
-      { r: 'Manager', a: 'Verify', s: '24h' },
-      { r: 'Finance', a: 'Validate', s: '48h' },
-      { r: 'Finance Mgr', a: 'Approve', s: '72h' },
+      { r: 'Manager', a: 'Initial Verify', s: '24h' },
+      { r: 'Finance Team', a: 'Receipt Validation', s: '48h' },
+      { r: 'Finance Manager', a: 'Final Approval', s: '72h' },
     ],
     dt: 'Expense Report',
     on: 1,
@@ -182,42 +393,87 @@ const WF = [
   {
     id: 'w5',
     name: 'Vendor Invoice',
-    desc: 'Three-way match + payment auth',
+    desc: 'Vendor payment processing with three-way match verification',
     steps: [
-      { r: 'AP', a: 'Match', s: '24h' },
-      { r: 'Finance Mgr', a: 'Pay Auth', s: '48h' },
+      { r: 'AP Team', a: 'Three-way Match', s: '24h' },
+      { r: 'Finance Manager', a: 'Payment Authorization', s: '48h' },
     ],
     dt: 'Vendor Invoice',
-    on: 0,
+    on: 1,
     n: 56,
     rt: 88,
   },
+  {
+    id: 'w6',
+    name: 'Contract Approval',
+    desc: 'Legal contract review and executive approval workflow',
+    steps: [
+      { r: 'Legal Counsel', a: 'Legal Review', s: '72h' },
+      { r: 'Finance Manager', a: 'Financial Terms', s: '48h' },
+      { r: 'CFO', a: 'Executive Approval', s: '96h' },
+    ],
+    dt: 'Contract',
+    on: 1,
+    n: 45,
+    rt: 94,
+  },
+  {
+    id: 'w7',
+    name: 'IT Asset Request',
+    desc: 'Hardware and software procurement approval',
+    steps: [
+      { r: 'IT Manager', a: 'Technical Review', s: '48h' },
+      { r: 'CTO', a: 'Strategic Alignment', s: '72h' },
+      { r: 'Finance Manager', a: 'Budget Approval', s: '48h' },
+    ],
+    dt: 'IT Asset Request',
+    on: 0,
+    n: 67,
+    rt: 91,
+  },
+  {
+    id: 'w8',
+    name: 'Capital Expenditure',
+    desc: 'Major capital investment approval chain',
+    steps: [
+      { r: 'Department Head', a: 'Business Case', s: '96h' },
+      { r: 'Finance Manager', a: 'Financial Analysis', s: '96h' },
+      { r: 'CFO', a: 'Risk Assessment', s: '120h' },
+      { r: 'CEO', a: 'Final Authorization', s: '120h' },
+    ],
+    dt: 'CapEx',
+    on: 1,
+    n: 23,
+    rt: 87,
+  },
 ];
-const ID = [
+
+// 10 SAMPLE DOCUMENTS (including $875k CapEx)
+const INITIAL_DOCS = [
   {
     id: 'GRN-2026-001',
-    title: 'Office Supplies GRN',
+    title: 'Office Supplies - Q1 2026',
     type: 'GRN',
     status: 'pending',
     by: 'John Smith',
     at: '2026-02-08',
-    desc: 'Premium paper, pens, archival folders for Q1.',
+    desc: 'Premium office supplies including paper, pens, and archival folders for Q1 operations.',
     amt: 2450,
     pri: 'medium',
     due: '2026-02-10',
     dept: 'Procurement',
     vnd: 'Office Depot',
     items: [
-      { n: 'Paper A4', q: 50, p: 25 },
-      { n: 'Pens', q: 20, p: 15 },
-      { n: 'Folders', q: 100, p: 12 },
+      { n: 'Paper A4 Premium', q: 50, p: 25 },
+      { n: 'Ballpoint Pens', q: 20, p: 15 },
+      { n: 'Archival Folders', q: 100, p: 12 },
     ],
     ap: [
       {
         id: 'a1',
         uid: '1',
         nm: 'Sarah Johnson',
-        rl: 'Finance Mgr',
+        rl: 'Finance Manager',
         st: 'pending',
       },
       {
@@ -229,38 +485,48 @@ const ID = [
       },
     ],
     tr: [
-      { a: 'Created', u: 'John Smith', t: '02/08 09:30', d: 'Submitted' },
-      { a: 'Routed', u: 'System', t: '02/08 09:31', d: '→ Sarah Johnson' },
+      {
+        a: 'Created',
+        u: 'John Smith',
+        t: '02/08 09:30',
+        d: 'Initial submission',
+      },
+      {
+        a: 'Routed',
+        u: 'System',
+        t: '02/08 09:31',
+        d: 'Sent to Sarah Johnson',
+      },
     ],
   },
   {
     id: 'GRN-2026-002',
-    title: 'IT Hardware Refresh',
+    title: 'IT Hardware Refresh - Engineering',
     type: 'GRN',
     status: 'in_progress',
     by: 'Maria Garcia',
     at: '2026-02-07',
-    desc: 'Laptops, peripherals, monitors for Q1 refresh.',
+    desc: 'Laptops, peripherals, and monitors for Q1 engineering team hardware refresh.',
     amt: 15750,
     pri: 'high',
     due: '2026-02-09',
     dept: 'IT',
-    vnd: 'Tech Solutions',
+    vnd: 'Tech Solutions Inc',
     items: [
-      { n: 'Dell Laptop', q: 5, p: 1200 },
-      { n: 'Mouse', q: 10, p: 35 },
-      { n: 'Hub', q: 5, p: 75 },
-      { n: 'Monitor', q: 5, p: 2000 },
+      { n: 'Dell Laptop XPS 15', q: 5, p: 1200 },
+      { n: 'Wireless Mouse', q: 10, p: 35 },
+      { n: 'USB-C Hub', q: 5, p: 75 },
+      { n: '27" Monitor', q: 5, p: 400 },
     ],
     ap: [
       {
         id: 'a3',
         uid: '1',
         nm: 'Sarah Johnson',
-        rl: 'Finance Mgr',
+        rl: 'Finance Manager',
         st: 'approved',
         ts: '02/08 08:20',
-        cm: 'Budget verified.',
+        cm: 'Budget verified and approved.',
         sg: 'SJ',
       },
       {
@@ -272,74 +538,89 @@ const ID = [
       },
     ],
     tr: [
-      { a: 'Created', u: 'Maria Garcia', t: '02/07 14:15', d: 'IT request' },
+      {
+        a: 'Created',
+        u: 'Maria Garcia',
+        t: '02/07 14:15',
+        d: 'IT hardware request submitted',
+      },
       {
         a: 'Approved 1/2',
         u: 'Sarah Johnson',
         t: '02/08 08:20',
-        d: 'Finance OK',
+        d: 'Finance approved',
       },
     ],
   },
   {
     id: 'PO-2026-045',
-    title: 'Marketing Materials PO',
+    title: 'Marketing Materials - Q1 Campaign',
     type: 'Purchase Order',
     status: 'completed',
     by: 'Lisa Anderson',
     at: '2026-02-06',
-    desc: 'Q1 banners, brochures, branded merchandise.',
+    desc: 'Q1 marketing campaign materials including banners, brochures, and branded merchandise.',
     amt: 8900,
     pri: 'medium',
     dept: 'Marketing',
-    vnd: 'PrintPro',
+    vnd: 'PrintPro Solutions',
     items: [
-      { n: 'Banners', q: 20, p: 125 },
-      { n: 'Brochures', q: 5, p: 380 },
-      { n: 'Bags', q: 500, p: 8 },
+      { n: 'Trade Show Banners', q: 20, p: 125 },
+      { n: 'Product Brochures', q: 5000, p: 0.38 },
+      { n: 'Branded Tote Bags', q: 500, p: 8 },
     ],
     ap: [
       {
         id: 'a5',
         uid: '3',
         nm: 'David Park',
-        rl: 'Mktg Dir',
+        rl: 'Marketing Director',
         st: 'approved',
         ts: '02/07 10:30',
-        cm: 'Q1 approved.',
+        cm: 'Q1 campaign approved.',
         sg: 'DP',
       },
       {
         id: 'a6',
         uid: '1',
         nm: 'Sarah Johnson',
-        rl: 'Finance Mgr',
+        rl: 'Finance Manager',
         st: 'approved',
         ts: '02/07 16:45',
-        cm: 'Within budget.',
+        cm: 'Within quarterly budget.',
         sg: 'SJ',
       },
     ],
     tr: [
       { a: 'Created', u: 'Lisa Anderson', t: '02/06 11:00', d: 'PO submitted' },
-      { a: 'Approved 1/2', u: 'David Park', t: '02/07 10:30', d: 'Mktg OK' },
+      {
+        a: 'Approved 1/2',
+        u: 'David Park',
+        t: '02/07 10:30',
+        d: 'Marketing approved',
+      },
       {
         a: 'Approved 2/2',
         u: 'Sarah Johnson',
         t: '02/07 16:45',
-        d: 'Finance OK',
+        d: 'Finance approved',
       },
-      { a: 'Completed', u: 'System', t: '02/07 16:45', d: 'All approvals' },
+      {
+        a: 'Completed',
+        u: 'System',
+        t: '02/07 16:45',
+        d: 'All approvals received',
+      },
     ],
   },
   {
     id: 'LR-2026-012',
-    title: 'Annual Leave Request',
+    title: 'Annual Leave - February 2026',
     type: 'Leave Request',
     status: 'pending',
     by: 'Maria Garcia',
     at: '2026-02-08',
-    desc: 'Feb 20-28 vacation. Coverage arranged.',
+    desc: 'Annual leave request for Feb 20-28, 2026. Team coverage arranged with backup.',
     amt: 0,
     pri: 'low',
     due: '2026-02-15',
@@ -354,115 +635,291 @@ const ID = [
       },
     ],
     tr: [
-      { a: 'Created', u: 'Maria Garcia', t: '02/08 10:00', d: 'Leave request' },
+      {
+        a: 'Created',
+        u: 'Maria Garcia',
+        t: '02/08 10:00',
+        d: 'Leave request submitted',
+      },
     ],
   },
   {
     id: 'EXP-2026-008',
-    title: 'Client Dinner Expense',
+    title: 'Client Dinner - Acme Corp',
     type: 'Expense Report',
     status: 'rejected',
     by: 'David Park',
     at: '2026-02-05',
-    desc: 'Acme Corp dinner. Missing receipt.',
+    desc: 'Client entertainment expense for Acme Corp dinner meeting. Missing itemized receipt.',
     amt: 475.5,
     pri: 'medium',
     dept: 'Marketing',
-    vnd: 'Capital Grille',
+    vnd: 'The Capital Grille',
     ap: [
       {
         id: 'a8',
         uid: '1',
         nm: 'Sarah Johnson',
-        rl: 'Finance Mgr',
+        rl: 'Finance Manager',
         st: 'rejected',
         ts: '02/06 09:15',
-        cm: 'Missing itemized receipt.',
+        cm: 'Please provide itemized receipt per policy.',
       },
     ],
     tr: [
-      { a: 'Created', u: 'David Park', t: '02/05 15:30', d: 'Submitted' },
+      {
+        a: 'Created',
+        u: 'David Park',
+        t: '02/05 15:30',
+        d: 'Expense submitted',
+      },
       {
         a: 'Rejected',
         u: 'Sarah Johnson',
         t: '02/06 09:15',
-        d: 'Missing receipt',
+        d: 'Missing documentation',
       },
     ],
   },
   {
     id: 'VI-2026-003',
-    title: 'AWS Cloud Invoice',
+    title: 'AWS Cloud Services - January 2026',
     type: 'Vendor Invoice',
     status: 'in_progress',
     by: 'Maria Garcia',
     at: '2026-02-07',
-    desc: 'January AWS. Three-way match verified.',
+    desc: 'Monthly AWS cloud infrastructure invoice. Three-way match verified.',
     amt: 12340,
     pri: 'high',
     due: '2026-02-12',
     dept: 'IT',
-    vnd: 'AWS',
+    vnd: 'Amazon Web Services',
     ap: [
       {
         id: 'a9',
         uid: '2',
         nm: 'Michael Chen',
-        rl: 'VP Ops',
+        rl: 'VP Operations',
         st: 'approved',
         ts: '02/08 11:00',
-        cm: 'Confirmed.',
+        cm: 'Usage confirmed.',
         sg: 'MC',
       },
       {
         id: 'a10',
         uid: '1',
         nm: 'Sarah Johnson',
-        rl: 'Finance Mgr',
+        rl: 'Finance Manager',
         st: 'pending',
       },
     ],
     tr: [
-      { a: 'Created', u: 'Maria Garcia', t: '02/07 08:45', d: 'Invoice' },
-      { a: 'Approved 1/2', u: 'Michael Chen', t: '02/08 11:00', d: 'Ops OK' },
+      {
+        a: 'Created',
+        u: 'Maria Garcia',
+        t: '02/07 08:45',
+        d: 'Invoice received',
+      },
+      {
+        a: 'Approved 1/2',
+        u: 'Michael Chen',
+        t: '02/08 11:00',
+        d: 'Operations verified',
+      },
     ],
   },
   {
     id: 'PO-2026-046',
-    title: 'Ergonomic Furniture PO',
+    title: 'Ergonomic Office Furniture',
     type: 'Purchase Order',
     status: 'draft',
     by: 'John Smith',
     at: '2026-02-08',
-    desc: 'Standing desks + chairs for wellness.',
+    desc: 'Standing desks and ergonomic chairs for employee wellness program.',
     amt: 22500,
     pri: 'medium',
     dept: 'Procurement',
     vnd: 'Herman Miller',
     items: [
       { n: 'Aeron Chair', q: 15, p: 1200 },
-      { n: 'Nevi Desk', q: 5, p: 900 },
+      { n: 'Nevi Standing Desk', q: 10, p: 900 },
     ],
     ap: [],
-    tr: [{ a: 'Draft', u: 'John Smith', t: '02/08 13:00', d: 'Saved' }],
+    tr: [
+      {
+        a: 'Draft Created',
+        u: 'John Smith',
+        t: '02/08 13:00',
+        d: 'Saved as draft',
+      },
+    ],
+  },
+  {
+    id: 'PO-2026-047',
+    title: 'Annual Software Licenses - Enterprise Suite',
+    type: 'Purchase Order',
+    status: 'pending',
+    by: 'Maria Garcia',
+    at: '2026-02-09',
+    desc: 'Annual renewal for enterprise software suite including Microsoft 365, Salesforce, and Adobe Creative Cloud.',
+    amt: 45780,
+    pri: 'high',
+    due: '2026-02-15',
+    dept: 'IT',
+    vnd: 'Software Licensing Corp',
+    items: [
+      { n: 'Microsoft 365 E5', q: 150, p: 168 },
+      { n: 'Salesforce Enterprise', q: 75, p: 225 },
+      { n: 'Adobe Creative Cloud', q: 20, p: 599 },
+    ],
+    ap: [
+      { id: 'a11', uid: '10', nm: 'Emma Davis', rl: 'CTO', st: 'pending' },
+      {
+        id: 'a12',
+        uid: '1',
+        nm: 'Sarah Johnson',
+        rl: 'Finance Manager',
+        st: 'pending',
+      },
+    ],
+    tr: [
+      {
+        a: 'Created',
+        u: 'Maria Garcia',
+        t: '02/09 09:15',
+        d: 'License renewal request',
+      },
+      {
+        a: 'Routed',
+        u: 'System',
+        t: '02/09 09:16',
+        d: 'Sent to CTO for review',
+      },
+    ],
+  },
+  {
+    id: 'CON-2026-001',
+    title: 'Vendor Service Agreement - Logistics Partner',
+    type: 'Contract',
+    status: 'pending',
+    by: 'Ryan Martinez',
+    at: '2026-02-08',
+    desc: '3-year logistics and warehousing service agreement with preferred vendor.',
+    amt: 250000,
+    pri: 'urgent',
+    due: '2026-02-20',
+    dept: 'Operations',
+    vnd: 'Global Logistics Inc',
+    ap: [
+      {
+        id: 'a13',
+        uid: '9',
+        nm: 'James Taylor',
+        rl: 'Legal Counsel',
+        st: 'pending',
+      },
+      {
+        id: 'a14',
+        uid: '1',
+        nm: 'Sarah Johnson',
+        rl: 'Finance Manager',
+        st: 'pending',
+      },
+      { id: 'a15', uid: '7', nm: 'Robert Wilson', rl: 'CFO', st: 'pending' },
+    ],
+    tr: [
+      {
+        a: 'Created',
+        u: 'Ryan Martinez',
+        t: '02/08 14:30',
+        d: 'Contract review requested',
+      },
+      {
+        a: 'Routed',
+        u: 'System',
+        t: '02/08 14:31',
+        d: 'Sent to Legal for review',
+      },
+    ],
+  },
+  {
+    id: 'CAPEX-2026-001',
+    title: 'Warehouse Automation System',
+    type: 'CapEx',
+    status: 'in_progress',
+    by: 'Michael Chen',
+    at: '2026-02-05',
+    desc: 'Capital investment for automated warehouse management system with ROI of 3.2 years.',
+    amt: 875000,
+    pri: 'urgent',
+    due: '2026-02-28',
+    dept: 'Operations',
+    vnd: 'AutoWare Systems',
+    ap: [
+      {
+        id: 'a16',
+        uid: '2',
+        nm: 'Michael Chen',
+        rl: 'VP Operations',
+        st: 'approved',
+        ts: '02/05 16:00',
+        cm: 'Business case validated.',
+        sg: 'MC',
+      },
+      {
+        id: 'a17',
+        uid: '1',
+        nm: 'Sarah Johnson',
+        rl: 'Finance Manager',
+        st: 'approved',
+        ts: '02/06 10:30',
+        cm: 'Financial analysis complete.',
+        sg: 'SJ',
+      },
+      { id: 'a18', uid: '7', nm: 'Robert Wilson', rl: 'CFO', st: 'pending' },
+    ],
+    tr: [
+      {
+        a: 'Created',
+        u: 'Michael Chen',
+        t: '02/05 10:00',
+        d: 'CapEx proposal submitted',
+      },
+      {
+        a: 'Approved 1/3',
+        u: 'Michael Chen',
+        t: '02/05 16:00',
+        d: 'Operations approved',
+      },
+      {
+        a: 'Approved 2/3',
+        u: 'Sarah Johnson',
+        t: '02/06 10:30',
+        d: 'Finance approved',
+      },
+    ],
   },
 ];
+
 const cM = [
   { m: 'Sep', sub: 45, app: 38, rej: 4, avg: 3.2 },
   { m: 'Oct', sub: 52, app: 44, rej: 5, avg: 2.9 },
   { m: 'Nov', sub: 48, app: 42, rej: 3, avg: 2.7 },
   { m: 'Dec', sub: 38, app: 34, rej: 2, avg: 2.5 },
   { m: 'Jan', sub: 61, app: 53, rej: 4, avg: 2.4 },
-  { m: 'Feb', sub: 29, app: 18, rej: 2, avg: 2.3 },
+  { m: 'Feb', sub: 35, app: 24, rej: 3, avg: 2.3 },
 ];
+
 const cD = [
-  { name: 'Finance', value: 34, color: '#3b82f6' },
-  { name: 'Ops', value: 28, color: '#10b981' },
-  { name: 'Mktg', value: 22, color: '#f59e0b' },
-  { name: 'IT', value: 31, color: '#8b5cf6' },
-  { name: 'HR', value: 15, color: '#ec4899' },
-  { name: 'Proc', value: 26, color: '#06b6d4' },
+  { name: 'Finance', value: 42, color: '#3b82f6' },
+  { name: 'Operations', value: 38, color: '#10b981' },
+  { name: 'Marketing', value: 28, color: '#f59e0b' },
+  { name: 'IT', value: 45, color: '#8b5cf6' },
+  { name: 'HR', value: 22, color: '#ec4899' },
+  { name: 'Procurement', value: 34, color: '#06b6d4' },
+  { name: 'Legal', value: 18, color: '#f43f5e' },
 ];
+
 const cT = [
   { w: 'W1', t: 3.8 },
   { w: 'W2', t: 3.5 },
@@ -473,12 +930,16 @@ const cT = [
   { w: 'W7', t: 2.4 },
   { w: 'W8', t: 2.3 },
 ];
+
 const DT = [
   'GRN',
   'Purchase Order',
   'Leave Request',
   'Expense Report',
   'Vendor Invoice',
+  'Contract',
+  'IT Asset Request',
+  'CapEx',
 ];
 const DP = [
   'Finance',
@@ -490,6 +951,8 @@ const DP = [
   'Legal',
   'Executive',
 ];
+
+// Styles
 const si = {
   padding: '7px 12px',
   border: '1px solid #e2e8f0',
@@ -520,6 +983,7 @@ const bt = (bg = '#3b82f6', fg = '#fff') => ({
   fontSize: 13,
   cursor: 'pointer',
 });
+
 const SB = ({ s }) => {
   const m = {
     draft: { b: '#f1f5f9', c: '#64748b' },
@@ -532,20 +996,19 @@ const SB = ({ s }) => {
   return (
     <span
       style={{
-        display: 'inline-flex',
-        padding: '3px 10px',
-        borderRadius: 6,
-        fontSize: 11,
-        fontWeight: 700,
+        padding: '4px 10px',
         background: v.b,
         color: v.c,
-        textTransform: 'capitalize',
+        borderRadius: 6,
+        fontSize: 12,
+        fontWeight: 600,
       }}
     >
       {s.replace('_', ' ')}
     </span>
   );
 };
+
 const PB = ({ p }) => {
   const c = {
     urgent: '#ef4444',
@@ -556,58 +1019,565 @@ const PB = ({ p }) => {
   return (
     <span
       style={{
-        fontSize: 11,
-        fontWeight: 700,
-        textTransform: 'uppercase',
-        letterSpacing: '0.05em',
+        padding: '3px 8px',
+        background: `${c[p]}15`,
         color: c[p],
+        borderRadius: 4,
+        fontSize: 11,
+        fontWeight: 600,
+        textTransform: 'uppercase',
       }}
     >
       {p}
     </span>
   );
 };
+
+const STORAGE_KEYS = {
+  DOCS: 'approval_docs',
+  NOTIFS: 'approval_notifs',
+  CURRENT_USER: 'approval_current_user',
+  WORKFLOWS: 'approval_workflows',
+  ACTIVE_MODULE: 'active_module',
+};
+
+const saveToStorage = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error('Error saving to localStorage:', e);
+  }
+};
+
+const loadFromStorage = (key, defaultValue) => {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : defaultValue;
+  } catch (e) {
+    console.error('Error loading from localStorage:', e);
+    return defaultValue;
+  }
+};
+
+// ============================================================
+// LANDING SCREEN COMPONENT
+// ============================================================
+
+const LandingScreen = ({ onModuleSelect, currentUser }) => {
+  const [hoveredModule, setHoveredModule] = useState(null);
+
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
+      }}
+    >
+      <header
+        style={{
+          background: 'rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(10px)',
+          borderBottom: '1px solid rgba(255,255,255,0.2)',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1400,
+            margin: '0 auto',
+            padding: '20px 40px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div
+              style={{
+                width: 48,
+                height: 48,
+                background: '#fff',
+                borderRadius: 12,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Building2 size={28} style={{ color: '#667eea' }} />
+            </div>
+            <div>
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: 24,
+                  fontWeight: 700,
+                  color: '#fff',
+                }}
+              >
+                Massy Enterprise Suite
+              </h1>
+              <p
+                style={{
+                  margin: 0,
+                  fontSize: 13,
+                  color: 'rgba(255,255,255,0.8)',
+                }}
+              >
+                Unified Business Management Platform
+              </p>
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div
+              style={{
+                padding: '8px 16px',
+                background: 'rgba(255,255,255,0.2)',
+                borderRadius: 8,
+                backdropFilter: 'blur(10px)',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 12,
+                  color: 'rgba(255,255,255,0.8)',
+                  marginBottom: 2,
+                }}
+              >
+                Logged in as
+              </div>
+              <div style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>
+                {currentUser.name}
+              </div>
+            </div>
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                background: 'rgba(255,255,255,0.2)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 600,
+                fontSize: 16,
+                color: '#fff',
+              }}
+            >
+              {currentUser.name
+                .split(' ')
+                .map((n) => n[0])
+                .join('')}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div
+        style={{ maxWidth: 1400, margin: '0 auto', padding: '60px 40px 40px' }}
+      >
+        <div style={{ textAlign: 'center', marginBottom: 50 }}>
+          <h2
+            style={{
+              margin: 0,
+              marginBottom: 16,
+              fontSize: 42,
+              fontWeight: 700,
+              color: '#fff',
+              textShadow: '0 2px 20px rgba(0,0,0,0.2)',
+            }}
+          >
+            Enterprise Business Solutions
+          </h2>
+          <p
+            style={{
+              margin: 0,
+              fontSize: 18,
+              color: 'rgba(255,255,255,0.9)',
+              maxWidth: 700,
+              margin: '0 auto',
+            }}
+          >
+            Streamline operations across your organization with our
+            comprehensive suite of integrated business applications
+          </p>
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 20,
+            marginBottom: 50,
+          }}
+        >
+          {[
+            {
+              label: 'Active Users',
+              value: '1,245',
+              icon: Users,
+              color: '#10b981',
+            },
+            {
+              label: 'Workflows',
+              value: '142',
+              icon: GitBranch,
+              color: '#3b82f6',
+            },
+            {
+              label: 'Documents',
+              value: '15.7K',
+              icon: FileText,
+              color: '#f59e0b',
+            },
+            { label: 'Uptime', value: '99.9%', icon: Zap, color: '#8b5cf6' },
+          ].map((stat, idx) => (
+            <div
+              key={idx}
+              style={{
+                background: 'rgba(255,255,255,0.15)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: 16,
+                padding: 24,
+                border: '1px solid rgba(255,255,255,0.2)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'start',
+                  marginBottom: 12,
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: 'rgba(255,255,255,0.8)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                  }}
+                >
+                  {stat.label}
+                </div>
+                <stat.icon size={22} style={{ color: stat.color }} />
+              </div>
+              <div style={{ fontSize: 36, fontWeight: 700, color: '#fff' }}>
+                {stat.value}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div>
+          <h3
+            style={{
+              fontSize: 20,
+              fontWeight: 600,
+              color: '#fff',
+              marginBottom: 24,
+              textAlign: 'center',
+            }}
+          >
+            Select a Module to Get Started
+          </h3>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: 24,
+            }}
+          >
+            {ENTERPRISE_MODULES.map((module) => (
+              <div
+                key={module.id}
+                onClick={() => {
+                  if (module.available) onModuleSelect(module.id);
+                }}
+                onMouseEnter={() => setHoveredModule(module.id)}
+                onMouseLeave={() => setHoveredModule(null)}
+                style={{
+                  background:
+                    hoveredModule === module.id
+                      ? 'rgba(255,255,255,0.25)'
+                      : 'rgba(255,255,255,0.15)',
+                  backdropFilter: 'blur(10px)',
+                  borderRadius: 20,
+                  padding: 28,
+                  border:
+                    hoveredModule === module.id
+                      ? '2px solid rgba(255,255,255,0.4)'
+                      : '2px solid rgba(255,255,255,0.2)',
+                  cursor: module.available ? 'pointer' : 'not-allowed',
+                  opacity: module.available ? 1 : 0.6,
+                  transition: 'all 0.3s ease',
+                  transform:
+                    hoveredModule === module.id && module.available
+                      ? 'translateY(-4px) scale(1.02)'
+                      : 'translateY(0) scale(1)',
+                  boxShadow:
+                    hoveredModule === module.id
+                      ? '0 20px 60px rgba(0,0,0,0.3)'
+                      : '0 10px 30px rgba(0,0,0,0.2)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    width: '50%',
+                    height: '100%',
+                    background: module.gradient,
+                    opacity: 0.1,
+                    borderRadius: '50%',
+                    filter: 'blur(40px)',
+                    pointerEvents: 'none',
+                  }}
+                />
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'start',
+                      marginBottom: 16,
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 56,
+                        height: 56,
+                        background: module.available
+                          ? module.gradient
+                          : 'rgba(148,163,184,0.3)',
+                        borderRadius: 16,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+                      }}
+                    >
+                      <module.icon size={28} style={{ color: '#fff' }} />
+                    </div>
+                    {module.available ? (
+                      <span
+                        style={{
+                          padding: '6px 12px',
+                          background: '#10b981',
+                          color: '#fff',
+                          borderRadius: 8,
+                          fontSize: 11,
+                          fontWeight: 700,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.5px',
+                        }}
+                      >
+                        Active
+                      </span>
+                    ) : (
+                      <span
+                        style={{
+                          padding: '6px 12px',
+                          background: 'rgba(148,163,184,0.3)',
+                          color: 'rgba(255,255,255,0.8)',
+                          borderRadius: 8,
+                          fontSize: 11,
+                          fontWeight: 700,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.5px',
+                        }}
+                      >
+                        Soon
+                      </span>
+                    )}
+                  </div>
+                  <h3
+                    style={{
+                      margin: 0,
+                      marginBottom: 10,
+                      fontSize: 20,
+                      fontWeight: 700,
+                      color: '#fff',
+                    }}
+                  >
+                    {module.name}
+                  </h3>
+                  <p
+                    style={{
+                      margin: 0,
+                      marginBottom: 20,
+                      fontSize: 14,
+                      color: 'rgba(255,255,255,0.85)',
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {module.desc}
+                  </p>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      paddingTop: 16,
+                      borderTop: '1px solid rgba(255,255,255,0.2)',
+                    }}
+                  >
+                    <div>
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: 'rgba(255,255,255,0.7)',
+                          marginBottom: 4,
+                        }}
+                      >
+                        Active
+                      </div>
+                      <div
+                        style={{ fontSize: 18, fontWeight: 700, color: '#fff' }}
+                      >
+                        {module.stats.active}
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: 'rgba(255,255,255,0.7)',
+                          marginBottom: 4,
+                        }}
+                      >
+                        Pending
+                      </div>
+                      <div
+                        style={{ fontSize: 18, fontWeight: 700, color: '#fff' }}
+                      >
+                        {module.stats.pending}
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          fontSize: 11,
+                          color: 'rgba(255,255,255,0.7)',
+                          marginBottom: 4,
+                        }}
+                      >
+                        Success Rate
+                      </div>
+                      <div
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 700,
+                          color: '#10b981',
+                        }}
+                      >
+                        {module.stats.rate}
+                      </div>
+                    </div>
+                  </div>
+                  {module.available && (
+                    <div
+                      style={{
+                        marginTop: 20,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        color: '#fff',
+                        fontSize: 14,
+                        fontWeight: 600,
+                      }}
+                    >
+                      Launch Module <ArrowRight size={18} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: 60,
+            textAlign: 'center',
+            padding: '30px 0',
+            borderTop: '1px solid rgba(255,255,255,0.2)',
+          }}
+        >
+          <p
+            style={{ margin: 0, fontSize: 13, color: 'rgba(255,255,255,0.7)' }}
+          >
+            © 2026 Massy Enterprise Suite. All rights reserved. | Version 2.5.0
+            | <span style={{ color: '#10b981' }}>● System Operational</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ============================================================
+// MAIN APP COMPONENT
+// ============================================================
+
 export default function App() {
+  // Module selection state
+  const [activeModule, setActiveModule] = useState(() =>
+    loadFromStorage(STORAGE_KEYS.ACTIVE_MODULE, null)
+  );
+
+  // Approval Hub states
   const [vw, setVw] = useState('dashboard');
-  const [docs, setDocs] = useState(ID);
+  const [docs, setDocs] = useState(() =>
+    loadFromStorage(STORAGE_KEYS.DOCS, INITIAL_DOCS)
+  );
+  const [workflows, setWorkflows] = useState(() =>
+    loadFromStorage(STORAGE_KEYS.WORKFLOWS, INITIAL_WORKFLOWS)
+  );
   const [sel, setSel] = useState(null);
   const [modal, setModal] = useState(null);
   const [showN, setShowN] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const [sb, setSb] = useState(true);
   const [sq, setSq] = useState('');
   const [fS, setFS] = useState('all');
   const [fT, setFT] = useState('all');
   const [fD, setFD] = useState('all');
-  const [cu, setCu] = useState(U[0]);
+  const [cu, setCu] = useState(() =>
+    loadFromStorage(STORAGE_KEYS.CURRENT_USER, U[0])
+  );
   const [selWf, setSelWf] = useState(null);
-  const [selU, setSelU] = useState(null);
   const [sTab, setSTab] = useState('users');
-  const [notifs, setNotifs] = useState([
-    {
-      id: 'n1',
-      title: 'Approval Required',
-      msg: 'GRN-2026-001 needs signature',
-      type: 'warning',
-      ts: '02/08 09:31',
-      read: false,
-    },
-    {
-      id: 'n2',
-      title: 'Approved',
-      msg: 'PO-2026-045 complete',
-      type: 'success',
-      ts: '02/07 16:45',
-      read: true,
-    },
-    {
-      id: 'n3',
-      title: 'Invoice',
-      msg: 'VI-2026-003 awaiting auth',
-      type: 'warning',
-      ts: '02/08 11:01',
-      read: false,
-    },
-  ]);
+  const [notifs, setNotifs] = useState(() =>
+    loadFromStorage(STORAGE_KEYS.NOTIFS, [
+      {
+        id: 'n1',
+        title: 'Approval Required',
+        msg: 'GRN-2026-001 needs your signature',
+        type: 'warning',
+        ts: '02/08 09:31',
+        read: false,
+      },
+      {
+        id: 'n2',
+        title: 'Completed',
+        msg: 'PO-2026-045 fully approved',
+        type: 'success',
+        ts: '02/07 16:45',
+        read: true,
+      },
+      {
+        id: 'n3',
+        title: 'Urgent',
+        msg: 'CAPEX-2026-001 requires CFO approval',
+        type: 'warning',
+        ts: '02/06 10:31',
+        read: false,
+      },
+    ])
+  );
   const [sig, setSig] = useState('');
   const [cmt, setCmt] = useState('');
   const [rTo, setRTo] = useState('');
@@ -623,9 +1593,30 @@ export default function App() {
     due: '',
     items: [{ n: '', q: 1, p: 0 }],
   });
+  const [editingWf, setEditingWf] = useState(null);
+
   const cRef = useRef(null);
+
+  // Persistence effects
+  useEffect(() => {
+    saveToStorage(STORAGE_KEYS.DOCS, docs);
+  }, [docs]);
+  useEffect(() => {
+    saveToStorage(STORAGE_KEYS.WORKFLOWS, workflows);
+  }, [workflows]);
+  useEffect(() => {
+    saveToStorage(STORAGE_KEYS.NOTIFS, notifs);
+  }, [notifs]);
+  useEffect(() => {
+    saveToStorage(STORAGE_KEYS.CURRENT_USER, cu);
+  }, [cu]);
+  useEffect(() => {
+    saveToStorage(STORAGE_KEYS.ACTIVE_MODULE, activeModule);
+  }, [activeModule]);
+
+  // Helper functions
   const now = () => new Date().toLocaleString();
-  const notify = (t, m, ty = 'info') =>
+  const notify = (t, m, ty = 'info') => {
     setNotifs((p) => [
       {
         id: `n${Date.now()}`,
@@ -637,6 +1628,9 @@ export default function App() {
       },
       ...p,
     ]);
+  };
+
+  // Stats
   const st = {
     total: docs.length,
     pend: docs.filter((d) =>
@@ -647,6 +1641,8 @@ export default function App() {
     prog: docs.filter((d) => d.status === 'in_progress').length,
     dft: docs.filter((d) => d.status === 'draft').length,
   };
+
+  // Filtered documents
   const fd = docs.filter((d) => {
     const q = sq.toLowerCase();
     return (
@@ -659,15 +1655,49 @@ export default function App() {
       (fD === 'all' || d.dept === fD)
     );
   });
-  // Actions
-  const createDoc = () => {
-    if (!nd.title || !nd.desc) return alert('Fill required fields');
+
+  // Module handlers
+  const handleModuleSelect = (moduleId) => {
+    setActiveModule(moduleId);
+    notify(
+      'Module Loaded',
+      `Switched to ${ENTERPRISE_MODULES.find((m) => m.id === moduleId)?.name}`,
+      'success'
+    );
+  };
+
+  const handleBackToModules = () => {
+    setActiveModule(null);
+    setVw('dashboard');
+  };
+
+  // User switching
+  const switchUser = (userId, e) => {
+    if (e) e.stopPropagation();
+    const user = U.find((u) => u.id === userId);
+    if (user) {
+      setCu(user);
+      setShowUserMenu(false);
+      notify('User Switched', `Now logged in as ${user.name}`, 'info');
+    }
+  };
+
+  // Document actions
+  const createDoc = (e) => {
+    if (e) e.preventDefault();
+    if (!nd.title || !nd.desc) {
+      alert('Fill required fields');
+      return;
+    }
     const px = {
       GRN: 'GRN',
       'Purchase Order': 'PO',
       'Leave Request': 'LR',
       'Expense Report': 'EXP',
       'Vendor Invoice': 'VI',
+      Contract: 'CON',
+      'IT Asset Request': 'IT',
+      CapEx: 'CAPEX',
     }[nd.type];
     const id = `${px}-2026-${String(docs.length + 1).padStart(3, '0')}`;
     const its = nd.items.filter((i) => i.n.trim());
@@ -693,7 +1723,7 @@ export default function App() {
             id: `a${Date.now()}`,
             uid: '1',
             nm: 'Sarah Johnson',
-            rl: 'Finance Mgr',
+            rl: 'Finance Manager',
             st: 'pending',
           },
           {
@@ -725,7 +1755,12 @@ export default function App() {
     });
     notify('Created', `${id} submitted`, 'success');
   };
-  const subDraft = (doc) => {
+
+  const subDraft = (doc, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     setDocs((p) =>
       p.map((d) =>
         d.id !== doc.id
@@ -738,7 +1773,7 @@ export default function App() {
                   id: `a${Date.now()}`,
                   uid: '1',
                   nm: 'Sarah Johnson',
-                  rl: 'Finance Mgr',
+                  rl: 'Finance Manager',
                   st: 'pending',
                 },
                 {
@@ -758,8 +1793,16 @@ export default function App() {
     );
     notify('Submitted', `${doc.id} pending`, 'success');
   };
-  const doApproval = (id, ok) => {
-    if (ok && !sig) return alert('Sign first');
+
+  const doApproval = (id, ok, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    if (ok && !sig) {
+      alert('Sign first');
+      return;
+    }
     setDocs((p) =>
       p.map((doc) => {
         if (doc.id !== id) return doc;
@@ -774,8 +1817,8 @@ export default function App() {
               }
             : a
         );
-        const allOk = ups.every((a) => a.st === 'approved'),
-          bad = ups.some((a) => a.st === 'rejected');
+        const allOk = ups.every((a) => a.st === 'approved');
+        const bad = ups.some((a) => a.st === 'rejected');
         const ns = bad ? 'rejected' : allOk ? 'completed' : 'in_progress';
         const t = [
           ...(doc.tr || []),
@@ -791,7 +1834,12 @@ export default function App() {
           },
         ];
         if (ns === 'completed')
-          t.push({ a: 'Completed', u: 'System', t: now(), d: 'All approvals' });
+          t.push({
+            a: 'Completed',
+            u: 'System',
+            t: now(),
+            d: 'All approvals received',
+          });
         notify(
           ok ? 'Approved' : 'Rejected',
           `${doc.id}`,
@@ -805,7 +1853,12 @@ export default function App() {
     setSig('');
     setCmt('');
   };
-  const doReassign = (id) => {
+
+  const doReassign = (id, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     const t = U.find((u) => u.id === rTo);
     if (!t) return;
     setDocs((p) =>
@@ -830,7 +1883,12 @@ export default function App() {
     setModal(null);
     setRTo('');
   };
-  const doResub = (doc) => {
+
+  const doResub = (doc, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     setDocs((p) =>
       p.map((d) =>
         d.id !== doc.id
@@ -856,14 +1914,24 @@ export default function App() {
     setModal(null);
     setRN('');
   };
-  const delDoc = (id) => {
+
+  const delDoc = (id, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     if (!confirm('Delete?')) return;
     setDocs((p) => p.filter((d) => d.id !== id));
     setModal(null);
     setSel(null);
     notify('Deleted', id, 'error');
   };
-  const dupDoc = (doc) => {
+
+  const dupDoc = (doc, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     const nid = `${doc.id.split('-').slice(0, -1).join('-')}-${String(
       docs.length + 1
     ).padStart(3, '0')}`;
@@ -881,7 +1949,12 @@ export default function App() {
     ]);
     notify('Duplicated', nid, 'success');
   };
-  const expDoc = (doc) => {
+
+  const expDoc = (doc, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     const b = new Blob([JSON.stringify(doc, null, 2)], {
       type: 'application/json',
     });
@@ -891,17 +1964,101 @@ export default function App() {
     a.click();
     notify('Exported', doc.id, 'success');
   };
-  // Sig pad
+
+  // Workflow actions
+  const createWorkflow = (e) => {
+    if (e) e.preventDefault();
+    const newWf = {
+      id: `w${workflows.length + 1}`,
+      name: 'New Workflow',
+      desc: 'Workflow description',
+      steps: [{ r: 'Approver Role', a: 'Action', s: '24h' }],
+      dt: 'GRN',
+      on: 0,
+      n: 0,
+      rt: 0,
+    };
+    setWorkflows((p) => [...p, newWf]);
+    setEditingWf(newWf);
+    setModal('edit-wf');
+    notify('Created', 'New workflow created', 'success');
+  };
+
+  const updateWorkflow = (e) => {
+    if (e) e.preventDefault();
+    if (!editingWf) return;
+    setWorkflows((p) => p.map((w) => (w.id === editingWf.id ? editingWf : w)));
+    setModal(null);
+    setEditingWf(null);
+    notify('Updated', 'Workflow saved', 'success');
+  };
+
+  const deleteWorkflow = (wfId, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    if (!confirm('Delete this workflow?')) return;
+    setWorkflows((p) => p.filter((w) => w.id !== wfId));
+    setModal(null);
+    setSelWf(null);
+    notify('Deleted', 'Workflow removed', 'error');
+  };
+
+  const toggleWorkflow = (wfId, e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    setWorkflows((p) =>
+      p.map((w) => (w.id === wfId ? { ...w, on: w.on ? 0 : 1 } : w))
+    );
+    notify('Updated', 'Workflow status changed', 'info');
+  };
+
+  const resetData = (e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    if (!confirm('Reset all data to defaults? This cannot be undone.')) return;
+    localStorage.clear();
+    setDocs(INITIAL_DOCS);
+    setWorkflows(INITIAL_WORKFLOWS);
+    setNotifs([
+      {
+        id: 'n1',
+        title: 'Approval Required',
+        msg: 'GRN-2026-001 needs signature',
+        type: 'warning',
+        ts: '02/08 09:31',
+        read: false,
+      },
+      {
+        id: 'n2',
+        title: 'Approved',
+        msg: 'PO-2026-045 complete',
+        type: 'success',
+        ts: '02/07 16:45',
+        read: true,
+      },
+    ]);
+    setCu(U[0]);
+    setActiveModule(null);
+    notify('Reset Complete', 'All data restored to defaults', 'info');
+  };
+
+  // Signature canvas
   useEffect(() => {
     if (modal !== 'sig' || !cRef.current) return;
-    const c = cRef.current,
-      ctx = c.getContext('2d');
+    const c = cRef.current;
+    const ctx = c.getContext('2d');
     let on = false,
       lx = 0,
       ly = 0;
     const pos = (e) => {
-      const r = c.getBoundingClientRect(),
-        t = e.touches ? e.touches[0] : e;
+      const r = c.getBoundingClientRect();
+      const t = e.touches ? e.touches[0] : e;
       return [t.clientX - r.left, t.clientY - r.top];
     };
     const start = (e) => {
@@ -939,178 +2096,125 @@ export default function App() {
     setTimeout(() => ev.forEach(([e, h]) => c.addEventListener(e, h)), 50);
     return () => ev.forEach(([e, h]) => c.removeEventListener(e, h));
   }, [modal]);
-  const clrSig = () => {
+
+  const clrSig = (e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
     const c = cRef.current;
     if (c) {
       c.getContext('2d').clearRect(0, 0, c.width, c.height);
       setSig('');
     }
   };
+
+  // Show landing screen if no module selected
+  if (!activeModule) {
+    return (
+      <LandingScreen onModuleSelect={handleModuleSelect} currentUser={cu} />
+    );
+  }
+
+  // ============================================================
   // MODALS
+  // ============================================================
+
+  // Document Detail Modal
   const DocModal = () => {
     if (!sel || modal !== 'doc') return null;
-    const d = sel,
-      ca = d.ap?.some((a) => a.uid === cu.id && a.st === 'pending');
+    const d = sel;
+    const ca = d.ap?.some((a) => a.uid === cu.id && a.st === 'pending');
     return (
       <div
         style={{
           position: 'fixed',
           inset: 0,
-          background: 'rgba(0,0,0,0.45)',
+          background: 'rgba(0,0,0,0.4)',
           display: 'flex',
-          alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 2000,
-          padding: 20,
-          backdropFilter: 'blur(4px)',
+          alignItems: 'center',
+          zIndex: 1000,
         }}
-        onClick={() => setModal(null)}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setModal(null);
+        }}
       >
         <div
           style={{
             background: '#fff',
-            borderRadius: 14,
+            borderRadius: 12,
+            width: '90%',
             maxWidth: 800,
-            width: '100%',
             maxHeight: '90vh',
-            overflowY: 'auto',
-            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+            overflow: 'auto',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
           }}
-          onClick={(e) => e.stopPropagation()}
         >
           <div
             style={{
-              padding: '18px 22px',
+              padding: 20,
               borderBottom: '1px solid #e2e8f0',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
             }}
           >
-            <h2 style={{ fontSize: 18, fontWeight: 800 }}>{d.id}</h2>
-            <div style={{ display: 'flex', gap: 5 }}>
-              <button
-                onClick={() => expDoc(d)}
-                style={{ ...bt('#fff', '#334155'), padding: '6px' }}
-              >
-                <Download size={15} />
-              </button>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(d.id);
-                  notify('Copied', 'ID', 'success');
-                }}
-                style={{ ...bt('#fff', '#334155'), padding: '6px' }}
-              >
-                <Copy size={15} />
-              </button>
-              <button
-                onClick={() => setModal(null)}
+            <div>
+              <h2 style={{ margin: 0, fontSize: 20 }}>{d.title}</h2>
+              <div
                 style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
+                  marginTop: 8,
+                  display: 'flex',
+                  gap: 8,
+                  alignItems: 'center',
                 }}
               >
-                <X size={20} />
-              </button>
-            </div>
-          </div>
-          <div style={{ padding: 22 }}>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: 14,
-              }}
-            >
-              <div>
-                <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 5 }}>
-                  {d.title}
-                </h3>
+                <span style={{ color: '#64748b', fontSize: 14 }}>{d.id}</span>
                 <SB s={d.status} />
+                <PB p={d.pri} />
               </div>
-              <PB p={d.pri} />
             </div>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))',
-                gap: 8,
-                padding: 12,
-                background: '#f8fafc',
-                borderRadius: 8,
-                marginBottom: 14,
-                fontSize: 13,
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setModal(null);
               }}
+              style={{ ...bt('#fff', '#000'), padding: 8 }}
             >
-              <div>
-                <span style={{ color: '#94a3b8' }}>Type:</span> <b>{d.type}</b>
-              </div>
-              <div>
-                <span style={{ color: '#94a3b8' }}>Date:</span> <b>{d.at}</b>
-              </div>
-              <div>
-                <span style={{ color: '#94a3b8' }}>By:</span> <b>{d.by}</b>
-              </div>
-              <div>
-                <span style={{ color: '#94a3b8' }}>Dept:</span> <b>{d.dept}</b>
-              </div>
-              {d.vnd && (
-                <div>
-                  <span style={{ color: '#94a3b8' }}>Vendor:</span>{' '}
-                  <b>{d.vnd}</b>
-                </div>
-              )}
-              {d.amt > 0 && (
-                <div>
-                  <span style={{ color: '#94a3b8' }}>Amount:</span>{' '}
-                  <b>
-                    $
-                    {d.amt.toLocaleString('en-US', {
-                      minimumFractionDigits: 2,
-                    })}
-                  </b>
-                </div>
-              )}
-              {d.due && (
-                <div>
-                  <span style={{ color: '#94a3b8' }}>Due:</span> <b>{d.due}</b>
-                </div>
-              )}
-            </div>
-            <div style={{ marginBottom: 14 }}>
-              <h4 style={{ fontSize: 14, fontWeight: 700, marginBottom: 5 }}>
+              <X size={20} />
+            </button>
+          </div>
+          <div style={{ padding: 20 }}>
+            <div style={{ marginBottom: 20 }}>
+              <h3 style={{ fontSize: 14, color: '#64748b', marginBottom: 8 }}>
                 Description
-              </h4>
-              <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.6 }}>
-                {d.desc}
-              </p>
+              </h3>
+              <p style={{ margin: 0 }}>{d.desc}</p>
             </div>
-            {d.items?.length > 0 && (
-              <div style={{ marginBottom: 14 }}>
-                <h4 style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>
-                  Items
-                </h4>
-                <table
-                  style={{
-                    width: '100%',
-                    borderCollapse: 'collapse',
-                    fontSize: 13,
-                  }}
+            {d.items && d.items.length > 0 && (
+              <div style={{ marginBottom: 20 }}>
+                <h3
+                  style={{ fontSize: 14, color: '#64748b', marginBottom: 12 }}
                 >
+                  Items
+                </h3>
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr>
+                    <tr
+                      style={{
+                        background: '#f8fafc',
+                        borderBottom: '2px solid #e2e8f0',
+                      }}
+                    >
                       {['Item', 'Qty', 'Price', 'Total'].map((h) => (
                         <th
                           key={h}
                           style={{
-                            padding: '6px 8px',
+                            padding: 12,
                             textAlign: 'left',
-                            borderBottom: '2px solid #e2e8f0',
-                            fontSize: 12,
-                            fontWeight: 700,
-                            color: '#64748b',
+                            fontSize: 13,
+                            fontWeight: 600,
                           }}
                         >
                           {h}
@@ -1119,14 +2223,15 @@ export default function App() {
                     </tr>
                   </thead>
                   <tbody>
-                    {d.items.map((i, x) => (
-                      <tr key={x} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                        <td style={{ padding: '6px 8px' }}>{i.n}</td>
-                        <td style={{ padding: '6px 8px' }}>{i.q}</td>
-                        <td style={{ padding: '6px 8px' }}>
-                          ${i.p.toFixed(2)}
-                        </td>
-                        <td style={{ padding: '6px 8px', fontWeight: 600 }}>
+                    {d.items.map((i, idx) => (
+                      <tr
+                        key={idx}
+                        style={{ borderBottom: '1px solid #e2e8f0' }}
+                      >
+                        <td style={{ padding: 12 }}>{i.n}</td>
+                        <td style={{ padding: 12 }}>{i.q}</td>
+                        <td style={{ padding: 12 }}>${i.p.toFixed(2)}</td>
+                        <td style={{ padding: 12, fontWeight: 600 }}>
                           ${(i.q * i.p).toFixed(2)}
                         </td>
                       </tr>
@@ -1135,230 +2240,175 @@ export default function App() {
                 </table>
               </div>
             )}
-            {d.ap?.length > 0 && (
-              <div style={{ marginBottom: 14 }}>
-                <h4 style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>
-                  Approvals
-                </h4>
-                {d.ap.map((a, i) => (
+            {d.amt > 0 && (
+              <div
+                style={{
+                  padding: 16,
+                  background: '#f8fafc',
+                  borderRadius: 8,
+                  marginBottom: 20,
+                }}
+              >
+                <span style={{ fontSize: 14, color: '#64748b' }}>
+                  Total Amount:{' '}
+                </span>
+                <span
+                  style={{ fontSize: 20, fontWeight: 700, color: '#1e293b' }}
+                >
+                  ${d.amt.toLocaleString()}
+                </span>
+              </div>
+            )}
+            {d.ap && d.ap.length > 0 && (
+              <div style={{ marginBottom: 20 }}>
+                <h3
+                  style={{ fontSize: 14, color: '#64748b', marginBottom: 12 }}
+                >
+                  Approvers
+                </h3>
+                {d.ap.map((a) => (
                   <div
                     key={a.id}
                     style={{
-                      display: 'flex',
-                      gap: 10,
-                      paddingBottom: 12,
-                      position: 'relative',
+                      padding: 12,
+                      background: '#f8fafc',
+                      borderRadius: 8,
+                      marginBottom: 8,
                     }}
                   >
-                    {i < d.ap.length - 1 && (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          left: 13,
-                          top: 28,
-                          bottom: -4,
-                          width: 2,
-                          background: '#e2e8f0',
-                        }}
-                      />
-                    )}
                     <div
                       style={{
-                        width: 28,
-                        height: 28,
-                        borderRadius: '50%',
                         display: 'flex',
+                        justifyContent: 'space-between',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                        zIndex: 1,
-                        background:
-                          a.st === 'approved'
-                            ? '#ecfdf5'
-                            : a.st === 'rejected'
-                            ? '#fef2f2'
-                            : '#fffbeb',
-                        color:
-                          a.st === 'approved'
-                            ? '#10b981'
-                            : a.st === 'rejected'
-                            ? '#ef4444'
-                            : '#f59e0b',
                       }}
                     >
-                      {a.st === 'approved' ? (
-                        <Check size={13} />
-                      ) : a.st === 'rejected' ? (
-                        <X size={13} />
-                      ) : (
-                        <Clock size={13} />
-                      )}
+                      <div>
+                        <div style={{ fontWeight: 600 }}>{a.nm}</div>
+                        <div style={{ fontSize: 12, color: '#64748b' }}>
+                          {a.rl}
+                        </div>
+                      </div>
+                      <SB s={a.st} />
                     </div>
-                    <div style={{ flex: 1 }}>
+                    {a.cm && (
                       <div
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                        }}
+                        style={{ marginTop: 8, fontSize: 13, color: '#64748b' }}
                       >
-                        <b style={{ fontSize: 13 }}>{a.nm}</b>
-                        <SB s={a.st} />
+                        💬 {a.cm}
                       </div>
-                      <div style={{ fontSize: 12, color: '#94a3b8' }}>
-                        {a.rl}
+                    )}
+                    {a.sg && (
+                      <div
+                        style={{ marginTop: 8, fontSize: 13, color: '#059669' }}
+                      >
+                        ✓ Signed
                       </div>
-                      {a.ts && (
-                        <div style={{ fontSize: 12, color: '#94a3b8' }}>
-                          {a.ts}
-                        </div>
-                      )}
-                      {a.cm && (
-                        <div
-                          style={{
-                            padding: '5px 8px',
-                            background: '#f8fafc',
-                            borderRadius: 6,
-                            fontSize: 13,
-                            marginTop: 3,
-                          }}
-                        >
-                          {a.cm}
-                        </div>
-                      )}
-                      {a.sg && (
-                        <div
-                          style={{
-                            fontSize: 12,
-                            color: '#10b981',
-                            fontWeight: 600,
-                            marginTop: 2,
-                          }}
-                        >
-                          ✓ Signed
-                        </div>
-                      )}
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+            {d.tr && d.tr.length > 0 && (
+              <div style={{ marginBottom: 20 }}>
+                <h3
+                  style={{ fontSize: 14, color: '#64748b', marginBottom: 12 }}
+                >
+                  Activity Trail
+                </h3>
+                {d.tr.map((t, idx) => (
+                  <div
+                    key={idx}
+                    style={{ display: 'flex', gap: 12, marginBottom: 12 }}
+                  >
+                    <div
+                      style={{
+                        width: 8,
+                        height: 8,
+                        background: '#3b82f6',
+                        borderRadius: '50%',
+                        marginTop: 6,
+                      }}
+                    />
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontWeight: 600, fontSize: 14 }}>{t.a}</div>
+                      <div
+                        style={{ fontSize: 12, color: '#64748b', marginTop: 2 }}
+                      >
+                        {t.u} • {t.t} • {t.d}
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
             )}
-            {d.tr?.length > 0 && (
-              <div style={{ marginBottom: 14 }}>
-                <h4 style={{ fontSize: 14, fontWeight: 700, marginBottom: 6 }}>
-                  Audit Trail
-                </h4>
-                <div
-                  style={{
-                    background: '#f8fafc',
-                    borderRadius: 8,
-                    padding: 12,
-                  }}
-                >
-                  {d.tr.map((e, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        display: 'flex',
-                        gap: 7,
-                        fontSize: 13,
-                        marginBottom: i < d.tr.length - 1 ? 7 : 0,
-                        paddingBottom: i < d.tr.length - 1 ? 7 : 0,
-                        borderBottom:
-                          i < d.tr.length - 1 ? '1px solid #e2e8f0' : 'none',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 5,
-                          height: 5,
-                          borderRadius: '50%',
-                          background: '#94a3b8',
-                          marginTop: 5,
-                          flexShrink: 0,
-                        }}
-                      />
-                      <div>
-                        <b>{e.a}</b>{' '}
-                        <span style={{ color: '#94a3b8' }}>by {e.u}</span>
-                        <div style={{ fontSize: 12, color: '#94a3b8' }}>
-                          {e.t} — {e.d}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
             <div
               style={{
                 display: 'flex',
-                gap: 5,
-                paddingTop: 12,
-                borderTop: '1px solid #e2e8f0',
+                gap: 12,
                 flexWrap: 'wrap',
+                marginTop: 24,
               }}
             >
-              <button
-                onClick={() => setModal(null)}
-                style={bt('#fff', '#334155')}
-              >
-                Close
-              </button>
+              {ca && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setModal('sig');
+                    }}
+                    style={bt('#10b981')}
+                  >
+                    <Check size={16} /> Approve
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      doApproval(d.id, false, e);
+                    }}
+                    style={bt('#ef4444')}
+                  >
+                    <XCircle size={16} /> Reject
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setModal('reassign');
+                    }}
+                    style={bt('#f59e0b')}
+                  >
+                    <Send size={16} /> Reassign
+                  </button>
+                </>
+              )}
               {d.status === 'draft' && (
+                <button onClick={(e) => subDraft(d, e)} style={bt('#3b82f6')}>
+                  <Send size={16} /> Submit
+                </button>
+              )}
+              {d.status === 'rejected' && d.by === cu.name && (
                 <button
-                  onClick={() => {
-                    subDraft(d);
-                    setModal(null);
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setModal('resub');
                   }}
-                  style={bt()}
+                  style={bt('#8b5cf6')}
                 >
-                  <Send size={14} />
-                  Submit
+                  <RefreshCw size={16} /> Resubmit
                 </button>
               )}
-              {d.status === 'rejected' && (
-                <button onClick={() => setModal('resub')} style={bt('#f59e0b')}>
-                  <RefreshCw size={14} />
-                  Resubmit
-                </button>
-              )}
-              {ca && (
+              <button onClick={(e) => dupDoc(d, e)} style={bt('#fff', '#000')}>
+                <Copy size={16} /> Duplicate
+              </button>
+              <button onClick={(e) => expDoc(d, e)} style={bt('#fff', '#000')}>
+                <Download size={16} /> Export
+              </button>
+              {(d.by === cu.name || cu.role === 'admin') && (
                 <button
-                  onClick={() => setModal('reassign')}
-                  style={bt('#fff', '#334155')}
+                  onClick={(e) => delDoc(d.id, e)}
+                  style={bt('#fef2f2', '#ef4444')}
                 >
-                  <Users size={14} />
-                  Reassign
-                </button>
-              )}
-              {ca && (
-                <button
-                  onClick={() => doApproval(d.id, false)}
-                  style={bt('#ef4444')}
-                >
-                  <XCircle size={14} />
-                  Reject
-                </button>
-              )}
-              {ca && (
-                <button onClick={() => setModal('sig')} style={bt('#10b981')}>
-                  <PenTool size={14} />
-                  Sign
-                </button>
-              )}
-              {(d.status === 'completed' || d.status === 'rejected') && (
-                <button onClick={() => dupDoc(d)} style={bt('#fff', '#334155')}>
-                  <Copy size={14} />
-                  Duplicate
-                </button>
-              )}
-              {d.status === 'draft' && (
-                <button
-                  onClick={() => delDoc(d.id)}
-                  style={{ ...bt('#fff', '#ef4444'), marginLeft: 'auto' }}
-                >
-                  <Trash2 size={14} />
-                  Delete
+                  <Trash2 size={16} /> Delete
                 </button>
               )}
             </div>
@@ -1367,184 +2417,282 @@ export default function App() {
       </div>
     );
   };
+
+  // Signature Modal
   const SigModal = () => {
-    if (modal !== 'sig' || !sel) return null;
+    if (!sel || modal !== 'sig') return null;
     return (
       <div
         style={{
           position: 'fixed',
           inset: 0,
-          background: 'rgba(0,0,0,0.45)',
+          background: 'rgba(0,0,0,0.4)',
           display: 'flex',
-          alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 2000,
-          padding: 20,
-          backdropFilter: 'blur(4px)',
+          alignItems: 'center',
+          zIndex: 1001,
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setModal('doc');
         }}
       >
         <div
           style={{
             background: '#fff',
-            borderRadius: 14,
-            maxWidth: 540,
-            width: '100%',
+            borderRadius: 12,
+            padding: 24,
+            width: '90%',
+            maxWidth: 600,
           }}
-          onClick={(e) => e.stopPropagation()}
         >
-          <div
-            style={{
-              padding: '16px 22px',
-              borderBottom: '1px solid #e2e8f0',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <h2 style={{ fontSize: 17, fontWeight: 800 }}>Digital Signature</h2>
-            <button
-              onClick={() => {
-                setModal(null);
-                setSig('');
-                setCmt('');
+          <h3 style={{ marginTop: 0 }}>Sign Approval</h3>
+          <div style={{ marginBottom: 16 }}>
+            <label
+              style={{
+                display: 'block',
+                marginBottom: 8,
+                fontSize: 14,
+                fontWeight: 600,
               }}
-              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
             >
-              <X size={20} />
-            </button>
+              Comments (optional)
+            </label>
+            <textarea
+              value={cmt}
+              onChange={(e) => setCmt(e.target.value)}
+              placeholder="Add review comments..."
+              style={{ ...ii, minHeight: 80, resize: 'vertical' }}
+            />
           </div>
-          <div style={{ padding: 22 }}>
+          <div style={{ marginBottom: 16 }}>
+            <label
+              style={{
+                display: 'block',
+                marginBottom: 8,
+                fontSize: 14,
+                fontWeight: 600,
+              }}
+            >
+              Signature *
+            </label>
             <div
               style={{
-                padding: 10,
-                background: '#f8fafc',
+                border: '2px solid #3b82f6',
                 borderRadius: 8,
-                marginBottom: 16,
-                fontSize: 13,
+                position: 'relative',
               }}
             >
-              <div>
-                <b>Doc:</b> {sel.title} ({sel.id})
-              </div>
-              <div>
-                <b>Approver:</b> {cu.name}
-              </div>
-            </div>
-            <div style={{ marginBottom: 12 }}>
-              <label
+              <canvas
+                ref={cRef}
+                width={500}
+                height={150}
                 style={{
                   display: 'block',
-                  fontSize: 13,
-                  fontWeight: 600,
-                  marginBottom: 5,
+                  width: '100%',
+                  cursor: 'crosshair',
+                  touchAction: 'none',
                 }}
-              >
-                Signature <span style={{ color: '#ef4444' }}>*</span>
-              </label>
-              <div
-                style={{
-                  border: '2px solid #e2e8f0',
-                  borderRadius: 8,
-                  overflow: 'hidden',
-                  position: 'relative',
-                  marginBottom: 5,
-                }}
-              >
-                <canvas
-                  ref={cRef}
-                  width={480}
-                  height={140}
-                  style={{
-                    display: 'block',
-                    width: '100%',
-                    cursor: 'crosshair',
-                    background: '#fff',
-                  }}
-                />
-                {!sig && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%,-50%)',
-                      color: '#cbd5e1',
-                      pointerEvents: 'none',
-                      fontSize: 14,
-                    }}
-                  >
-                    Draw signature
-                  </div>
-                )}
-              </div>
-              <button
-                onClick={clrSig}
-                style={{
-                  ...bt('#fff', '#64748b'),
-                  padding: '3px 8px',
-                  fontSize: 12,
-                }}
-              >
-                <RefreshCw size={12} />
-                Clear
-              </button>
-            </div>
-            <div style={{ marginBottom: 16 }}>
-              <label
-                style={{
-                  display: 'block',
-                  fontSize: 13,
-                  fontWeight: 600,
-                  marginBottom: 5,
-                }}
-              >
-                Comments
-              </label>
-              <textarea
-                value={cmt}
-                onChange={(e) => setCmt(e.target.value)}
-                placeholder="Notes..."
-                rows={3}
-                style={{ ...ii, resize: 'vertical' }}
               />
+              {!sig && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    color: '#94a3b8',
+                    pointerEvents: 'none',
+                  }}
+                >
+                  Sign here
+                </div>
+              )}
             </div>
-            <div
-              style={{ display: 'flex', gap: 5, justifyContent: 'flex-end' }}
+            <button
+              onClick={clrSig}
+              style={{ ...bt('#fff', '#000'), marginTop: 8, fontSize: 12 }}
             >
-              <button
-                onClick={() => {
-                  setModal(null);
-                  setSig('');
-                  setCmt('');
-                }}
-                style={bt('#fff', '#334155')}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => doApproval(sel.id, false)}
-                style={bt('#ef4444')}
-              >
-                <XCircle size={14} />
-                Reject
-              </button>
-              <button
-                onClick={() => doApproval(sel.id, true)}
-                disabled={!sig}
-                style={{
-                  ...bt('#10b981'),
-                  opacity: sig ? 1 : 0.5,
-                  cursor: sig ? 'pointer' : 'not-allowed',
-                }}
-              >
-                <CheckCircle size={14} />
-                Approve
-              </button>
-            </div>
+              Clear Signature
+            </button>
+          </div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button
+              onClick={(e) => doApproval(sel.id, true, e)}
+              disabled={!sig}
+              style={{
+                ...bt(sig ? '#10b981' : '#94a3b8'),
+                opacity: sig ? 1 : 0.5,
+              }}
+            >
+              <Check size={16} /> Confirm Approval
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setModal('doc');
+              }}
+              style={bt('#fff', '#000')}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
     );
   };
+
+  // Reassign Modal
+  const ReassignModal = () => {
+    if (!sel || modal !== 'reassign') return null;
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.4)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1001,
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setModal('doc');
+        }}
+      >
+        <div
+          style={{
+            background: '#fff',
+            borderRadius: 12,
+            padding: 24,
+            width: '90%',
+            maxWidth: 500,
+          }}
+        >
+          <h3 style={{ marginTop: 0 }}>Reassign Approval</h3>
+          <p style={{ color: '#64748b', marginBottom: 20 }}>
+            Reassign <strong>{sel.id}</strong> to another approver
+          </p>
+          <div style={{ marginBottom: 20 }}>
+            <label
+              style={{
+                display: 'block',
+                marginBottom: 8,
+                fontSize: 14,
+                fontWeight: 600,
+              }}
+            >
+              New Approver
+            </label>
+            <select
+              value={rTo}
+              onChange={(e) => setRTo(e.target.value)}
+              style={ii}
+            >
+              <option value="">Select approver...</option>
+              {U.filter((u) => u.role === 'approver' && u.id !== cu.id).map(
+                (u) => (
+                  <option key={u.id} value={u.id}>
+                    {u.name} - {u.title}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button
+              onClick={(e) => doReassign(sel.id, e)}
+              disabled={!rTo}
+              style={{
+                ...bt(rTo ? '#3b82f6' : '#94a3b8'),
+                opacity: rTo ? 1 : 0.5,
+              }}
+            >
+              <Send size={16} /> Reassign
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setModal('doc');
+              }}
+              style={bt('#fff', '#000')}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Resubmit Modal
+  const ResubModal = () => {
+    if (!sel || modal !== 'resub') return null;
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.4)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1001,
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setModal('doc');
+        }}
+      >
+        <div
+          style={{
+            background: '#fff',
+            borderRadius: 12,
+            padding: 24,
+            width: '90%',
+            maxWidth: 500,
+          }}
+        >
+          <h3 style={{ marginTop: 0 }}>Resubmit Document</h3>
+          <p style={{ color: '#64748b', marginBottom: 20 }}>
+            Resubmit <strong>{sel.id}</strong> — all approvals will be reset.
+          </p>
+          <div style={{ marginBottom: 20 }}>
+            <label
+              style={{
+                display: 'block',
+                marginBottom: 8,
+                fontSize: 14,
+                fontWeight: 600,
+              }}
+            >
+              Revision Note
+            </label>
+            <textarea
+              value={rN}
+              onChange={(e) => setRN(e.target.value)}
+              placeholder="Describe changes made..."
+              style={{ ...ii, minHeight: 80, resize: 'vertical' }}
+            />
+          </div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button onClick={(e) => doResub(sel, e)} style={bt('#8b5cf6')}>
+              <RefreshCw size={16} /> Resubmit
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setModal('doc');
+              }}
+              style={bt('#fff', '#000')}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Create Document Modal
   const CreateModal = () => {
     if (modal !== 'create') return null;
     return (
@@ -1552,54 +2700,57 @@ export default function App() {
         style={{
           position: 'fixed',
           inset: 0,
-          background: 'rgba(0,0,0,0.45)',
+          background: 'rgba(0,0,0,0.4)',
           display: 'flex',
-          alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 2000,
-          padding: 20,
-          backdropFilter: 'blur(4px)',
+          alignItems: 'center',
+          zIndex: 1000,
         }}
-        onClick={() => setModal(null)}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setModal(null);
+        }}
       >
         <div
           style={{
             background: '#fff',
-            borderRadius: 14,
-            maxWidth: 600,
-            width: '100%',
+            borderRadius: 12,
+            width: '90%',
+            maxWidth: 700,
             maxHeight: '90vh',
-            overflowY: 'auto',
+            overflow: 'auto',
           }}
-          onClick={(e) => e.stopPropagation()}
         >
           <div
             style={{
-              padding: '16px 22px',
+              padding: 20,
               borderBottom: '1px solid #e2e8f0',
               display: 'flex',
               justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
-            <h2 style={{ fontSize: 17, fontWeight: 800 }}>New Document</h2>
+            <h2 style={{ margin: 0, fontSize: 20 }}>Create New Document</h2>
             <button
-              onClick={() => setModal(null)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setModal(null);
+              }}
+              style={{ ...bt('#fff', '#000'), padding: 8 }}
             >
               <X size={20} />
             </button>
           </div>
-          <div style={{ padding: 22 }}>
-            <div style={{ marginBottom: 12 }}>
+          <div style={{ padding: 20 }}>
+            <div style={{ marginBottom: 16 }}>
               <label
                 style={{
                   display: 'block',
-                  fontSize: 13,
+                  marginBottom: 8,
+                  fontSize: 14,
                   fontWeight: 600,
-                  marginBottom: 4,
                 }}
               >
-                Type *
+                Document Type *
               </label>
               <select
                 value={nd.type}
@@ -1607,35 +2758,38 @@ export default function App() {
                 style={ii}
               >
                 {DT.map((t) => (
-                  <option key={t}>{t}</option>
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
                 ))}
               </select>
             </div>
-            <div style={{ marginBottom: 12 }}>
+            <div style={{ marginBottom: 16 }}>
               <label
                 style={{
                   display: 'block',
-                  fontSize: 13,
+                  marginBottom: 8,
+                  fontSize: 14,
                   fontWeight: 600,
-                  marginBottom: 4,
                 }}
               >
                 Title *
               </label>
               <input
+                type="text"
                 value={nd.title}
                 onChange={(e) => setNd({ ...nd, title: e.target.value })}
-                placeholder="Title"
+                placeholder="Enter document title..."
                 style={ii}
               />
             </div>
-            <div style={{ marginBottom: 12 }}>
+            <div style={{ marginBottom: 16 }}>
               <label
                 style={{
                   display: 'block',
-                  fontSize: 13,
+                  marginBottom: 8,
+                  fontSize: 14,
                   fontWeight: 600,
-                  marginBottom: 4,
                 }}
               >
                 Description *
@@ -1643,29 +2797,83 @@ export default function App() {
               <textarea
                 value={nd.desc}
                 onChange={(e) => setNd({ ...nd, desc: e.target.value })}
-                placeholder="Description"
-                rows={3}
-                style={{ ...ii, resize: 'vertical' }}
+                placeholder="Describe the request..."
+                style={{ ...ii, minHeight: 80, resize: 'vertical' }}
               />
             </div>
             <div
               style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: 8,
-                marginBottom: 12,
+                gap: 16,
+                marginBottom: 16,
               }}
             >
               <div>
                 <label
                   style={{
                     display: 'block',
-                    fontSize: 13,
+                    marginBottom: 8,
+                    fontSize: 14,
                     fontWeight: 600,
-                    marginBottom: 4,
                   }}
                 >
-                  Amount
+                  Department
+                </label>
+                <select
+                  value={nd.dept}
+                  onChange={(e) => setNd({ ...nd, dept: e.target.value })}
+                  style={ii}
+                >
+                  {DP.map((d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: 8,
+                    fontSize: 14,
+                    fontWeight: 600,
+                  }}
+                >
+                  Priority
+                </label>
+                <select
+                  value={nd.pri}
+                  onChange={(e) => setNd({ ...nd, pri: e.target.value })}
+                  style={ii}
+                >
+                  {['low', 'medium', 'high', 'urgent'].map((p) => (
+                    <option key={p} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: 16,
+                marginBottom: 16,
+              }}
+            >
+              <div>
+                <label
+                  style={{
+                    display: 'block',
+                    marginBottom: 8,
+                    fontSize: 14,
+                    fontWeight: 600,
+                  }}
+                >
+                  Amount ($)
                 </label>
                 <input
                   type="number"
@@ -1679,2213 +2887,1946 @@ export default function App() {
                 <label
                   style={{
                     display: 'block',
-                    fontSize: 13,
+                    marginBottom: 8,
+                    fontSize: 14,
                     fontWeight: 600,
-                    marginBottom: 4,
                   }}
                 >
-                  Priority
-                </label>
-                <select
-                  value={nd.pri}
-                  onChange={(e) => setNd({ ...nd, pri: e.target.value })}
-                  style={ii}
-                >
-                  {['low', 'medium', 'high', 'urgent'].map((p) => (
-                    <option key={p}>{p}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: 8,
-                marginBottom: 12,
-              }}
-            >
-              <div>
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: 13,
-                    fontWeight: 600,
-                    marginBottom: 4,
-                  }}
-                >
-                  Vendor
+                  Due Date
                 </label>
                 <input
-                  value={nd.vnd}
-                  onChange={(e) => setNd({ ...nd, vnd: e.target.value })}
-                  placeholder="Vendor"
+                  type="date"
+                  value={nd.due}
+                  onChange={(e) => setNd({ ...nd, due: e.target.value })}
                   style={ii}
                 />
               </div>
-              <div>
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: 13,
-                    fontWeight: 600,
-                    marginBottom: 4,
-                  }}
-                >
-                  Dept
-                </label>
-                <select
-                  value={nd.dept}
-                  onChange={(e) => setNd({ ...nd, dept: e.target.value })}
-                  style={ii}
-                >
-                  {DP.map((d) => (
-                    <option key={d}>{d}</option>
-                  ))}
-                </select>
-              </div>
             </div>
-            <div style={{ marginBottom: 12 }}>
+            <div style={{ marginBottom: 16 }}>
               <label
                 style={{
                   display: 'block',
-                  fontSize: 13,
+                  marginBottom: 8,
+                  fontSize: 14,
                   fontWeight: 600,
-                  marginBottom: 4,
                 }}
               >
-                Due
+                Vendor
               </label>
               <input
-                type="date"
-                value={nd.due}
-                onChange={(e) => setNd({ ...nd, due: e.target.value })}
+                type="text"
+                value={nd.vnd}
+                onChange={(e) => setNd({ ...nd, vnd: e.target.value })}
+                placeholder="Enter vendor name..."
                 style={ii}
               />
             </div>
-            <div style={{ marginBottom: 12 }}>
+            <div style={{ marginBottom: 20 }}>
               <label
                 style={{
                   display: 'block',
-                  fontSize: 13,
+                  marginBottom: 8,
+                  fontSize: 14,
                   fontWeight: 600,
-                  marginBottom: 5,
                 }}
               >
-                Items
+                Line Items
               </label>
-              {nd.items.map((it, i) => (
+              {nd.items.map((item, idx) => (
                 <div
-                  key={i}
+                  key={idx}
                   style={{
                     display: 'grid',
                     gridTemplateColumns: '2fr 1fr 1fr auto',
-                    gap: 5,
-                    marginBottom: 3,
+                    gap: 8,
+                    marginBottom: 8,
                   }}
                 >
                   <input
-                    value={it.n}
+                    type="text"
+                    value={item.n}
                     onChange={(e) => {
                       const items = [...nd.items];
-                      items[i] = { ...items[i], n: e.target.value };
+                      items[idx].n = e.target.value;
                       setNd({ ...nd, items });
                     }}
-                    placeholder="Item"
-                    style={{ ...ii, padding: '6px', fontSize: 13 }}
+                    placeholder="Item name"
+                    style={ii}
                   />
                   <input
                     type="number"
-                    value={it.q}
+                    value={item.q}
                     onChange={(e) => {
                       const items = [...nd.items];
-                      items[i] = { ...items[i], q: +e.target.value };
+                      items[idx].q = parseInt(e.target.value) || 1;
                       setNd({ ...nd, items });
                     }}
-                    style={{ ...ii, padding: '6px', fontSize: 13 }}
+                    placeholder="Qty"
+                    style={ii}
                   />
                   <input
                     type="number"
-                    value={it.p}
+                    value={item.p}
                     onChange={(e) => {
                       const items = [...nd.items];
-                      items[i] = { ...items[i], p: +e.target.value };
+                      items[idx].p = parseFloat(e.target.value) || 0;
                       setNd({ ...nd, items });
                     }}
-                    placeholder="$"
-                    style={{ ...ii, padding: '6px', fontSize: 13 }}
+                    placeholder="Price"
+                    style={ii}
                   />
-                  <button
-                    onClick={() => {
-                      const items = nd.items.filter((_, j) => j !== i);
-                      setNd({
-                        ...nd,
-                        items: items.length ? items : [{ n: '', q: 1, p: 0 }],
-                      });
-                    }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      color: '#ef4444',
-                    }}
-                  >
-                    <Trash2 size={14} />
-                  </button>
+                  {nd.items.length > 1 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setNd({
+                          ...nd,
+                          items: nd.items.filter((_, i) => i !== idx),
+                        });
+                      }}
+                      style={{
+                        ...bt('#fef2f2', '#ef4444'),
+                        padding: '9px 12px',
+                      }}
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  )}
                 </div>
               ))}
               <button
-                onClick={() =>
-                  setNd({ ...nd, items: [...nd.items, { n: '', q: 1, p: 0 }] })
-                }
-                style={{
-                  ...bt('#fff', '#3b82f6'),
-                  padding: '3px 8px',
-                  fontSize: 12,
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setNd({ ...nd, items: [...nd.items, { n: '', q: 1, p: 0 }] });
                 }}
+                style={{ ...bt('#fff', '#000'), fontSize: 12, marginTop: 8 }}
               >
-                <Plus size={12} />
-                Add
+                <Plus size={14} /> Add Item
               </button>
             </div>
-            <div
-              style={{
-                display: 'flex',
-                gap: 5,
-                justifyContent: 'flex-end',
-                paddingTop: 12,
-                borderTop: '1px solid #e2e8f0',
-              }}
-            >
+            <div style={{ display: 'flex', gap: 12 }}>
+              <button onClick={createDoc} style={bt('#10b981')}>
+                <Check size={16} /> Create & Submit
+              </button>
               <button
-                onClick={() => setModal(null)}
-                style={bt('#fff', '#334155')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setModal(null);
+                }}
+                style={bt('#fff', '#000')}
               >
                 Cancel
               </button>
-              <button onClick={createDoc} style={bt()}>
-                <FilePlus size={14} />
-                Create
-              </button>
             </div>
           </div>
         </div>
       </div>
     );
   };
-  const SmallModal = ({ title, children }) => (
-    <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0,0,0,0.45)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 2000,
-        padding: 20,
-        backdropFilter: 'blur(4px)',
-      }}
-    >
+
+  // Workflow Detail Modal
+  const WfModal = () => {
+    if (!selWf || modal !== 'wf') return null;
+    return (
       <div
         style={{
-          background: '#fff',
-          borderRadius: 14,
-          maxWidth: 440,
-          width: '100%',
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div
-          style={{
-            padding: '16px 22px',
-            borderBottom: '1px solid #e2e8f0',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <h2 style={{ fontSize: 17, fontWeight: 800 }}>{title}</h2>
-          <button
-            onClick={() => setModal(null)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-          >
-            <X size={20} />
-          </button>
-        </div>
-        <div style={{ padding: 22 }}>{children}</div>
-      </div>
-    </div>
-  );
-  const ReassignM = () => {
-    if (modal !== 'reassign' || !sel) return null;
-    return (
-      <SmallModal title="Reassign">
-        <p style={{ fontSize: 13, color: '#64748b', marginBottom: 12 }}>
-          Reassign <b>{sel.id}</b>
-        </p>
-        <select value={rTo} onChange={(e) => setRTo(e.target.value)} style={ii}>
-          <option value="">Choose...</option>
-          {U.filter((u) => u.role === 'approver' && u.id !== cu.id).map((u) => (
-            <option key={u.id} value={u.id}>
-              {u.name} — {u.title}
-            </option>
-          ))}
-        </select>
-        <div
-          style={{
-            display: 'flex',
-            gap: 5,
-            justifyContent: 'flex-end',
-            marginTop: 14,
-          }}
-        >
-          <button onClick={() => setModal(null)} style={bt('#fff', '#334155')}>
-            Cancel
-          </button>
-          <button
-            onClick={() => doReassign(sel.id)}
-            disabled={!rTo}
-            style={{ ...bt(), opacity: rTo ? 1 : 0.5 }}
-          >
-            Reassign
-          </button>
-        </div>
-      </SmallModal>
-    );
-  };
-  const ResubM = () => {
-    if (modal !== 'resub' || !sel) return null;
-    return (
-      <SmallModal title="Resubmit">
-        <p style={{ fontSize: 13, color: '#64748b', marginBottom: 12 }}>
-          Resubmit <b>{sel.id}</b> — all approvals reset.
-        </p>
-        <textarea
-          value={rN}
-          onChange={(e) => setRN(e.target.value)}
-          placeholder="What changed..."
-          rows={3}
-          style={{ ...ii, resize: 'vertical' }}
-        />
-        <div
-          style={{
-            display: 'flex',
-            gap: 5,
-            justifyContent: 'flex-end',
-            marginTop: 14,
-          }}
-        >
-          <button onClick={() => setModal(null)} style={bt('#fff', '#334155')}>
-            Cancel
-          </button>
-          <button onClick={() => doResub(sel)} style={bt('#f59e0b')}>
-            <RefreshCw size={14} />
-            Resubmit
-          </button>
-        </div>
-      </SmallModal>
-    );
-  };
-  const WfM = () => {
-    if (modal !== 'wf' || !selWf) return null;
-    return (
-      <SmallModal title={selWf.name}>
-        <p
-          style={{
-            fontSize: 14,
-            color: '#475569',
-            marginBottom: 14,
-            lineHeight: 1.6,
-          }}
-        >
-          {selWf.desc}
-        </p>
-        <div
-          style={{ display: 'flex', gap: 10, marginBottom: 14, fontSize: 13 }}
-        >
-          <span
-            style={{
-              padding: '3px 7px',
-              background: '#f1f5f9',
-              borderRadius: 5,
-              fontWeight: 600,
-            }}
-          >
-            {selWf.dt}
-          </span>
-          <span
-            style={{
-              padding: '3px 7px',
-              background: selWf.on ? '#ecfdf5' : '#fef2f2',
-              borderRadius: 5,
-              fontWeight: 600,
-              color: selWf.on ? '#047857' : '#b91c1c',
-            }}
-          >
-            {selWf.on ? 'Active' : 'Off'}
-          </span>
-          <span style={{ color: '#94a3b8' }}>{selWf.n} uses</span>
-        </div>
-        <h4 style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>
-          Steps
-        </h4>
-        {selWf.steps.map((s, i) => (
-          <div
-            key={i}
-            style={{
-              display: 'flex',
-              gap: 10,
-              marginBottom: 12,
-              position: 'relative',
-            }}
-          >
-            {i < selWf.steps.length - 1 && (
-              <div
-                style={{
-                  position: 'absolute',
-                  left: 13,
-                  top: 28,
-                  bottom: -12,
-                  width: 2,
-                  background: '#e2e8f0',
-                }}
-              />
-            )}
-            <div
-              style={{
-                width: 28,
-                height: 28,
-                borderRadius: '50%',
-                background: '#eff6ff',
-                color: '#3b82f6',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 700,
-                fontSize: 13,
-                flexShrink: 0,
-                zIndex: 1,
-              }}
-            >
-              {i + 1}
-            </div>
-            <div>
-              <div style={{ fontWeight: 600, fontSize: 14 }}>{s.r}</div>
-              <div style={{ fontSize: 13, color: '#64748b' }}>
-                {s.a} • {s.s}
-              </div>
-            </div>
-          </div>
-        ))}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            marginTop: 14,
-            paddingTop: 12,
-            borderTop: '1px solid #e2e8f0',
-          }}
-        >
-          <button onClick={() => setModal(null)} style={bt('#fff', '#334155')}>
-            Close
-          </button>
-        </div>
-      </SmallModal>
-    );
-  };
-  const UsrM = () => {
-    if (modal !== 'usr' || !selU) return null;
-    return (
-      <SmallModal title="User Profile">
-        <div style={{ textAlign: 'center' }}>
-          <div
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#fff',
-              fontSize: 18,
-              fontWeight: 700,
-              margin: '0 auto 8px',
-            }}
-          >
-            {selU.name
-              .split(' ')
-              .map((n) => n[0])
-              .join('')}
-          </div>
-          <h3 style={{ fontSize: 16, fontWeight: 700 }}>{selU.name}</h3>
-          <div style={{ fontSize: 13, color: '#64748b', marginBottom: 12 }}>
-            {selU.title}
-          </div>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 8,
-              textAlign: 'left',
-              padding: 12,
-              background: '#f8fafc',
-              borderRadius: 8,
-              fontSize: 13,
-            }}
-          >
-            <div>
-              <span style={{ color: '#94a3b8' }}>Email:</span>
-              <br />
-              <b>{selU.email}</b>
-            </div>
-            <div>
-              <span style={{ color: '#94a3b8' }}>Dept:</span>
-              <br />
-              <b>{selU.dept}</b>
-            </div>
-            <div>
-              <span style={{ color: '#94a3b8' }}>Role:</span>
-              <br />
-              <b style={{ textTransform: 'capitalize' }}>{selU.role}</b>
-            </div>
-            <div>
-              <span style={{ color: '#94a3b8' }}>Status:</span>
-              <br />
-              <b
-                style={{
-                  color: selU.status === 'active' ? '#047857' : '#b91c1c',
-                }}
-              >
-                {selU.status === 'active' ? '● Active' : '● Inactive'}
-              </b>
-            </div>
-          </div>
-        </div>
-      </SmallModal>
-    );
-  };
-  // VIEWS
-  const Dash = () => (
-    <div>
-      <div
-        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.4)',
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           alignItems: 'center',
-          marginBottom: 20,
-          flexWrap: 'wrap',
-          gap: 10,
+          zIndex: 1000,
         }}
-      >
-        <div>
-          <h1
-            style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}
-          >
-            Dashboard
-          </h1>
-          <p style={{ color: '#64748b', fontSize: 14, marginTop: 3 }}>
-            Welcome back, {cu.name.split(' ')[0]}
-          </p>
-        </div>
-        <button onClick={() => setModal('create')} style={bt()}>
-          <Plus size={16} />
-          New Document
-        </button>
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(170px,1fr))',
-          gap: 11,
-          marginBottom: 20,
-        }}
-      >
-        {[
-          {
-            l: 'Total',
-            v: st.total,
-            c: '#3b82f6',
-            bg: '#eff6ff',
-            ic: <FileText size={19} />,
-          },
-          {
-            l: 'Pending',
-            v: st.pend,
-            c: '#f59e0b',
-            bg: '#fffbeb',
-            ic: <Clock size={19} />,
-          },
-          {
-            l: 'In Progress',
-            v: st.prog,
-            c: '#8b5cf6',
-            bg: '#f5f3ff',
-            ic: <Activity size={19} />,
-          },
-          {
-            l: 'Completed',
-            v: st.done,
-            c: '#10b981',
-            bg: '#ecfdf5',
-            ic: <CheckCircle size={19} />,
-          },
-          {
-            l: 'Rejected',
-            v: st.rej,
-            c: '#ef4444',
-            bg: '#fef2f2',
-            ic: <XCircle size={19} />,
-          },
-          {
-            l: 'Drafts',
-            v: st.dft,
-            c: '#64748b',
-            bg: '#f8fafc',
-            ic: <Edit size={19} />,
-          },
-        ].map((s, i) => (
-          <div
-            key={i}
-            style={{
-              background: '#fff',
-              padding: 14,
-              borderRadius: 10,
-              border: '1px solid #e2e8f0',
-              display: 'flex',
-              gap: 10,
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow =
-                '0 6px 16px -4px rgba(0,0,0,0.08)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'none';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            <div
-              style={{
-                width: 38,
-                height: 38,
-                borderRadius: 8,
-                background: s.bg,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: s.c,
-              }}
-            >
-              {s.ic}
-            </div>
-            <div>
-              <div style={{ fontSize: 11, color: '#94a3b8' }}>{s.l}</div>
-              <div style={{ fontSize: 22, fontWeight: 800 }}>{s.v}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 14,
-          marginBottom: 20,
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setSelWf(null);
+            setModal(null);
+          }
         }}
       >
         <div
           style={{
             background: '#fff',
-            padding: 16,
-            borderRadius: 10,
-            border: '1px solid #e2e8f0',
-          }}
-        >
-          <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
-            Monthly Volume
-          </h3>
-          <ResponsiveContainer width="100%" height={190}>
-            <BarChart data={cM}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="m" fontSize={12} stroke="#94a3b8" />
-              <YAxis fontSize={12} stroke="#94a3b8" />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Bar
-                dataKey="app"
-                fill="#10b981"
-                radius={[3, 3, 0, 0]}
-                name="Approved"
-              />
-              <Bar
-                dataKey="rej"
-                fill="#ef4444"
-                radius={[3, 3, 0, 0]}
-                name="Rejected"
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-        <div
-          style={{
-            background: '#fff',
-            padding: 16,
-            borderRadius: 10,
-            border: '1px solid #e2e8f0',
-          }}
-        >
-          <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
-            Processing Time (days)
-          </h3>
-          <ResponsiveContainer width="100%" height={190}>
-            <AreaChart data={cT}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="w" fontSize={12} stroke="#94a3b8" />
-              <YAxis fontSize={12} stroke="#94a3b8" />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Area
-                type="monotone"
-                dataKey="t"
-                stroke="#3b82f6"
-                fill="rgba(59,130,246,0.1)"
-                strokeWidth={2}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '5fr 3fr', gap: 14 }}>
-        <div
-          style={{
-            background: '#fff',
-            padding: 16,
-            borderRadius: 10,
-            border: '1px solid #e2e8f0',
+            borderRadius: 12,
+            padding: 24,
+            width: '90%',
+            maxWidth: 600,
           }}
         >
           <div
             style={{
               display: 'flex',
               justifyContent: 'space-between',
-              marginBottom: 10,
+              alignItems: 'start',
+              marginBottom: 20,
             }}
           >
-            <h3 style={{ fontSize: 14, fontWeight: 700 }}>Recent</h3>
+            <div>
+              <h2 style={{ marginTop: 0, marginBottom: 8 }}>{selWf.name}</h2>
+              <p style={{ margin: 0, color: '#64748b' }}>{selWf.desc}</p>
+            </div>
             <button
-              onClick={() => setVw('documents')}
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelWf(null);
+                setModal(null);
+              }}
+              style={{ ...bt('#fff', '#000'), padding: 8 }}
+            >
+              <X size={20} />
+            </button>
+          </div>
+          <div style={{ marginBottom: 20 }}>
+            <h3 style={{ fontSize: 14, fontWeight: 600, marginBottom: 12 }}>
+              Approval Steps
+            </h3>
+            {selWf.steps.map((step, idx) => (
+              <div
+                key={idx}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  marginBottom: 12,
+                }}
+              >
+                <div
+                  style={{
+                    width: 32,
+                    height: 32,
+                    background: '#3b82f6',
+                    color: '#fff',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 600,
+                  }}
+                >
+                  {idx + 1}
+                </div>
+                <div
+                  style={{
+                    flex: 1,
+                    padding: 12,
+                    background: '#f8fafc',
+                    borderRadius: 8,
+                  }}
+                >
+                  <div style={{ fontWeight: 600 }}>{step.r}</div>
+                  <div style={{ fontSize: 12, color: '#64748b' }}>
+                    {step.a} • SLA: {step.s}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div
+            style={{
+              padding: 16,
+              background: '#f8fafc',
+              borderRadius: 8,
+              marginBottom: 20,
+            }}
+          >
+            <div
               style={{
-                background: 'none',
-                border: 'none',
-                color: '#3b82f6',
-                fontSize: 13,
-                cursor: 'pointer',
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: 16,
+              }}
+            >
+              <div>
+                <div
+                  style={{ fontSize: 12, color: '#64748b', marginBottom: 4 }}
+                >
+                  Total Processed
+                </div>
+                <div style={{ fontSize: 24, fontWeight: 700 }}>{selWf.n}</div>
+              </div>
+              <div>
+                <div
+                  style={{ fontSize: 12, color: '#64748b', marginBottom: 4 }}
+                >
+                  Completion Rate
+                </div>
+                <div
+                  style={{ fontSize: 24, fontWeight: 700, color: '#10b981' }}
+                >
+                  {selWf.rt}%
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setEditingWf(selWf);
+                setModal('edit-wf');
+              }}
+              style={bt('#3b82f6')}
+            >
+              <Edit size={16} /> Edit
+            </button>
+            <button
+              onClick={(e) => toggleWorkflow(selWf.id, e)}
+              style={bt(selWf.on ? '#f59e0b' : '#10b981')}
+            >
+              {selWf.on ? 'Deactivate' : 'Activate'}
+            </button>
+            <button
+              onClick={(e) => deleteWorkflow(selWf.id, e)}
+              style={bt('#fef2f2', '#ef4444')}
+            >
+              <Trash2 size={16} /> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Edit Workflow Modal
+  const EditWfModal = () => {
+    if (!editingWf || modal !== 'edit-wf') return null;
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.4)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1002,
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setEditingWf(null);
+            setModal(null);
+          }
+        }}
+      >
+        <div
+          style={{
+            background: '#fff',
+            borderRadius: 12,
+            padding: 24,
+            width: '90%',
+            maxWidth: 700,
+            maxHeight: '90vh',
+            overflow: 'auto',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: 20,
+            }}
+          >
+            <h2 style={{ margin: 0, fontSize: 20 }}>Edit Workflow</h2>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setEditingWf(null);
+                setModal(selWf ? 'wf' : null);
+              }}
+              style={{ ...bt('#fff', '#000'), padding: 8 }}
+            >
+              <X size={20} />
+            </button>
+          </div>
+          <div style={{ marginBottom: 16 }}>
+            <label
+              style={{
+                display: 'block',
+                marginBottom: 8,
+                fontSize: 14,
                 fontWeight: 600,
               }}
             >
-              All →
-            </button>
+              Workflow Name *
+            </label>
+            <input
+              type="text"
+              value={editingWf.name}
+              onChange={(e) =>
+                setEditingWf({ ...editingWf, name: e.target.value })
+              }
+              placeholder="Workflow name"
+              style={ii}
+            />
           </div>
-          {docs.slice(0, 5).map((d) => (
-            <div
-              key={d.id}
-              onClick={() => {
-                setSel(d);
-                setModal('doc');
-              }}
+          <div style={{ marginBottom: 16 }}>
+            <label
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: '7px 0',
-                borderBottom: '1px solid #f1f5f9',
-                cursor: 'pointer',
+                display: 'block',
+                marginBottom: 8,
+                fontSize: 14,
+                fontWeight: 600,
               }}
             >
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 600,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  {d.title}
-                </div>
-                <div style={{ fontSize: 11, color: '#94a3b8' }}>{d.id}</div>
-              </div>
-              <SB s={d.status} />
-            </div>
-          ))}
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              Description *
+            </label>
+            <textarea
+              value={editingWf.desc}
+              onChange={(e) =>
+                setEditingWf({ ...editingWf, desc: e.target.value })
+              }
+              placeholder="Describe the workflow..."
+              style={{ ...ii, minHeight: 80, resize: 'vertical' }}
+            />
+          </div>
           <div
             style={{
-              background: '#fff',
-              padding: 14,
-              borderRadius: 10,
-              border: '1px solid #e2e8f0',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 16,
+              marginBottom: 16,
             }}
           >
-            <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 8 }}>
-              Quick Actions
-            </h3>
-            {[
-              {
-                ic: <FilePlus size={15} />,
-                l: 'New Document',
-                a: () => setModal('create'),
-              },
-              {
-                ic: <Folder size={15} />,
-                l: 'Documents',
-                a: () => setVw('documents'),
-              },
-              {
-                ic: <BarChart3 size={15} />,
-                l: 'Analytics',
-                a: () => setVw('analytics'),
-              },
-              {
-                ic: <GitBranch size={15} />,
-                l: 'Workflows',
-                a: () => setVw('workflows'),
-              },
-            ].map((x, i) => (
-              <button
-                key={i}
-                onClick={x.a}
+            <div>
+              <label
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 7,
-                  padding: '7px 10px',
-                  background: '#f8fafc',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: 6,
-                  width: '100%',
-                  cursor: 'pointer',
-                  fontSize: 13,
+                  display: 'block',
+                  marginBottom: 8,
+                  fontSize: 14,
                   fontWeight: 600,
-                  marginBottom: 4,
-                  color: '#334155',
                 }}
               >
-                {x.ic}
-                {x.l}
-              </button>
-            ))}
-          </div>
-          <div
-            style={{
-              background: 'linear-gradient(135deg,#0c1222,#1e293b)',
-              padding: 14,
-              borderRadius: 10,
-              color: '#fff',
-            }}
-          >
-            <div style={{ fontSize: 11, fontWeight: 700, opacity: 0.6 }}>
-              SLA Performance
+                Document Type
+              </label>
+              <select
+                value={editingWf.dt}
+                onChange={(e) =>
+                  setEditingWf({ ...editingWf, dt: e.target.value })
+                }
+                style={ii}
+              >
+                {DT.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div style={{ fontSize: 24, fontWeight: 800 }}>94.2%</div>
-            <div style={{ fontSize: 12, color: '#10b981' }}>↑ 3.1%</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-  const Docs = () => (
-    <div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: 16,
-          flexWrap: 'wrap',
-          gap: 8,
-        }}
-      >
-        <div>
-          <h1
-            style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}
-          >
-            Documents
-          </h1>
-          <p style={{ color: '#64748b', fontSize: 14, marginTop: 3 }}>
-            Manage and approve
-          </p>
-        </div>
-        <button onClick={() => setModal('create')} style={bt()}>
-          <Plus size={16} />
-          New
-        </button>
-      </div>
-      <div
-        style={{
-          background: '#fff',
-          padding: '9px 12px',
-          borderRadius: 8,
-          border: '1px solid #e2e8f0',
-          marginBottom: 12,
-          display: 'flex',
-          gap: 7,
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        <Filter size={14} color="#94a3b8" />
-        <select value={fS} onChange={(e) => setFS(e.target.value)} style={si}>
-          <option value="all">Status</option>
-          {['draft', 'pending', 'in_progress', 'completed', 'rejected'].map(
-            (s) => (
-              <option key={s} value={s}>
-                {s.replace('_', ' ')}
-              </option>
-            )
-          )}
-        </select>
-        <select value={fT} onChange={(e) => setFT(e.target.value)} style={si}>
-          <option value="all">Type</option>
-          {DT.map((t) => (
-            <option key={t} value={t}>
-              {t}
-            </option>
-          ))}
-        </select>
-        <select value={fD} onChange={(e) => setFD(e.target.value)} style={si}>
-          <option value="all">Dept</option>
-          {DP.map((d) => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
-        <span style={{ marginLeft: 'auto', fontSize: 12, color: '#94a3b8' }}>
-          {fd.length}/{docs.length}
-        </span>
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))',
-          gap: 12,
-        }}
-      >
-        {fd.map((d) => (
-          <div
-            key={d.id}
-            onClick={() => {
-              setSel(d);
-              setModal('doc');
-            }}
-            style={{
-              background: '#fff',
-              borderRadius: 10,
-              border: '1px solid #e2e8f0',
-              padding: 15,
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow =
-                '0 8px 20px -6px rgba(0,0,0,0.1)';
-              e.currentTarget.style.borderColor = '#3b82f6';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'none';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.borderColor = '#e2e8f0';
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: 5,
-              }}
-            >
-              <span
+            <div>
+              <label
                 style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  color: '#64748b',
-                  background: '#f1f5f9',
-                  padding: '2px 5px',
-                  borderRadius: 4,
+                  display: 'block',
+                  marginBottom: 8,
+                  fontSize: 14,
+                  fontWeight: 600,
                 }}
               >
-                {d.type}
-              </span>
-              <PB p={d.pri} />
+                Status
+              </label>
+              <select
+                value={editingWf.on}
+                onChange={(e) =>
+                  setEditingWf({ ...editingWf, on: parseInt(e.target.value) })
+                }
+                style={ii}
+              >
+                <option value={1}>Active</option>
+                <option value={0}>Inactive</option>
+              </select>
             </div>
-            <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 2 }}>
-              {d.title}
-            </h3>
-            <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 5 }}>
-              {d.id}
-            </div>
-            <p
+          </div>
+          <div style={{ marginBottom: 20 }}>
+            <label
               style={{
-                fontSize: 13,
-                color: '#64748b',
-                lineHeight: 1.4,
-                marginBottom: 8,
-                display: '-webkit-box',
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
+                display: 'block',
+                marginBottom: 12,
+                fontSize: 14,
+                fontWeight: 600,
               }}
             >
-              {d.desc}
-            </p>
-            {d.amt > 0 && (
-              <div style={{ fontSize: 16, fontWeight: 800, marginBottom: 8 }}>
-                ${d.amt.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-              </div>
-            )}
-            <div
-              style={{
-                display: 'flex',
-                gap: 8,
-                fontSize: 11,
-                color: '#94a3b8',
-                marginBottom: 8,
-                paddingBottom: 8,
-                borderBottom: '1px solid #f1f5f9',
-              }}
-            >
-              <span>{d.by}</span>
-              <span>{(d.at || '').split(' ')[0]}</span>
-              {d.vnd && <span>{d.vnd}</span>}
-            </div>
-            {d.ap?.length > 0 && (
-              <div style={{ marginBottom: 8 }}>
+              Approval Steps
+            </label>
+            {editingWf.steps.map((step, idx) => (
+              <div
+                key={idx}
+                style={{
+                  marginBottom: 12,
+                  padding: 16,
+                  background: '#f8fafc',
+                  borderRadius: 8,
+                }}
+              >
                 <div
                   style={{
-                    height: 3,
-                    background: '#f1f5f9',
-                    borderRadius: 2,
-                    overflow: 'hidden',
-                    marginBottom: 2,
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: 12,
                   }}
                 >
-                  <div
-                    style={{
-                      height: '100%',
-                      width: `${
-                        (d.ap.filter((a) => a.st !== 'pending').length /
-                          d.ap.length) *
-                        100
-                      }%`,
-                      background: d.ap.some((a) => a.st === 'rejected')
-                        ? '#ef4444'
-                        : 'linear-gradient(90deg,#3b82f6,#10b981)',
-                      transition: 'width 0.3s',
+                  <span style={{ fontWeight: 600, fontSize: 14 }}>
+                    Step {idx + 1}
+                  </span>
+                  {editingWf.steps.length > 1 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setEditingWf({
+                          ...editingWf,
+                          steps: editingWf.steps.filter((_, i) => i !== idx),
+                        });
+                      }}
+                      style={{
+                        ...bt('#fef2f2', '#ef4444'),
+                        padding: '6px 10px',
+                        fontSize: 12,
+                      }}
+                    >
+                      <Trash2 size={14} />
+                    </button>
+                  )}
+                </div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 2fr 1fr',
+                    gap: 8,
+                  }}
+                >
+                  <input
+                    type="text"
+                    value={step.r}
+                    onChange={(e) => {
+                      const steps = [...editingWf.steps];
+                      steps[idx].r = e.target.value;
+                      setEditingWf({ ...editingWf, steps });
                     }}
+                    placeholder="Role/Person"
+                    style={ii}
+                  />
+                  <input
+                    type="text"
+                    value={step.a}
+                    onChange={(e) => {
+                      const steps = [...editingWf.steps];
+                      steps[idx].a = e.target.value;
+                      setEditingWf({ ...editingWf, steps });
+                    }}
+                    placeholder="Action"
+                    style={ii}
+                  />
+                  <input
+                    type="text"
+                    value={step.s}
+                    onChange={(e) => {
+                      const steps = [...editingWf.steps];
+                      steps[idx].s = e.target.value;
+                      setEditingWf({ ...editingWf, steps });
+                    }}
+                    placeholder="SLA"
+                    style={ii}
                   />
                 </div>
-                <div style={{ fontSize: 11, color: '#94a3b8' }}>
-                  {d.ap.filter((a) => a.st !== 'pending').length}/{d.ap.length}
-                </div>
               </div>
-            )}
-            <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
-              <SB s={d.status} />
-              {d.status === 'draft' && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    subDraft(d);
-                  }}
-                  style={{
-                    marginLeft: 'auto',
-                    padding: '3px 9px',
-                    background: '#3b82f6',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 5,
-                    fontSize: 11,
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 3,
-                  }}
-                >
-                  <Send size={11} />
-                  Submit
-                </button>
-              )}
-              {d.ap?.some((a) => a.uid === cu.id && a.st === 'pending') && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSel(d);
-                    setModal('sig');
-                  }}
-                  style={{
-                    marginLeft: 'auto',
-                    padding: '3px 9px',
-                    background: '#10b981',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: 5,
-                    fontSize: 11,
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 3,
-                  }}
-                >
-                  <PenTool size={11} />
-                  Review
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-      {fd.length === 0 && (
-        <div style={{ textAlign: 'center', padding: 36, color: '#94a3b8' }}>
-          <Folder size={32} style={{ opacity: 0.3, marginBottom: 6 }} />
-          <div style={{ fontWeight: 600 }}>No documents</div>
-        </div>
-      )}
-    </div>
-  );
-  const WfV = () => (
-    <div>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}>
-          Workflows
-        </h1>
-        <p style={{ color: '#64748b', fontSize: 14, marginTop: 3 }}>
-          Approval chains
-        </p>
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill,minmax(300px,1fr))',
-          gap: 12,
-        }}
-      >
-        {WF.map((w) => (
-          <div
-            key={w.id}
-            onClick={() => {
-              setSelWf(w);
-              setModal('wf');
-            }}
-            style={{
-              background: '#fff',
-              borderRadius: 10,
-              border: '1px solid #e2e8f0',
-              padding: 16,
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow =
-                '0 8px 20px -6px rgba(0,0,0,0.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'none';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginBottom: 7,
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  color: '#64748b',
-                  background: '#f1f5f9',
-                  padding: '2px 5px',
-                  borderRadius: 4,
-                }}
-              >
-                {w.dt}
-              </span>
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 600,
-                  padding: '2px 5px',
-                  borderRadius: 4,
-                  background: w.on ? '#ecfdf5' : '#fef2f2',
-                  color: w.on ? '#047857' : '#b91c1c',
-                }}
-              >
-                {w.on ? 'Active' : 'Off'}
-              </span>
-            </div>
-            <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 3 }}>
-              {w.name}
-            </h3>
-            <p
-              style={{
-                fontSize: 13,
-                color: '#64748b',
-                lineHeight: 1.4,
-                marginBottom: 10,
-              }}
-            >
-              {w.desc}
-            </p>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 3,
-                marginBottom: 8,
-              }}
-            >
-              {w.steps.map((s, i) => (
-                <React.Fragment key={i}>
-                  <span
-                    style={{
-                      padding: '3px 6px',
-                      background: '#f1f5f9',
-                      borderRadius: 4,
-                      fontSize: 11,
-                      fontWeight: 600,
-                      color: '#475569',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {s.r}
-                  </span>
-                  {i < w.steps.length - 1 && (
-                    <ArrowRight size={11} color="#94a3b8" />
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                gap: 12,
-                fontSize: 12,
-                color: '#94a3b8',
-              }}
-            >
-              <span>{w.steps.length} steps</span>
-              <span>{w.n} uses</span>
-              <span>{w.rt}%</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-  const Ana = () => (
-    <div>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}>
-          Analytics
-        </h1>
-        <p style={{ color: '#64748b', fontSize: 14, marginTop: 3 }}>
-          Performance metrics
-        </p>
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 14,
-          marginBottom: 16,
-        }}
-      >
-        <div
-          style={{
-            background: '#fff',
-            padding: 16,
-            borderRadius: 10,
-            border: '1px solid #e2e8f0',
-          }}
-        >
-          <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
-            Trends
-          </h3>
-          <ResponsiveContainer width="100%" height={220}>
-            <LineChart data={cM}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="m" fontSize={12} stroke="#94a3b8" />
-              <YAxis fontSize={12} stroke="#94a3b8" />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="sub"
-                stroke="#3b82f6"
-                strokeWidth={2}
-                dot={{ r: 3 }}
-                name="Submitted"
-              />
-              <Line
-                type="monotone"
-                dataKey="app"
-                stroke="#10b981"
-                strokeWidth={2}
-                dot={{ r: 3 }}
-                name="Approved"
-              />
-              <Line
-                type="monotone"
-                dataKey="rej"
-                stroke="#ef4444"
-                strokeWidth={2}
-                dot={{ r: 3 }}
-                name="Rejected"
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-        <div
-          style={{
-            background: '#fff',
-            padding: 16,
-            borderRadius: 10,
-            border: '1px solid #e2e8f0',
-          }}
-        >
-          <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
-            By Department
-          </h3>
-          <ResponsiveContainer width="100%" height={220}>
-            <PieChart>
-              <Pie
-                data={cD}
-                cx="50%"
-                cy="50%"
-                innerRadius={45}
-                outerRadius={85}
-                paddingAngle={3}
-                dataKey="value"
-                label={({ name, percent }) =>
-                  `${name} ${(percent * 100).toFixed(0)}%`
-                }
-                fontSize={11}
-              >
-                {cD.map((e, i) => (
-                  <Cell key={i} fill={e.color} />
-                ))}
-              </Pie>
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 14,
-          marginBottom: 16,
-        }}
-      >
-        <div
-          style={{
-            background: '#fff',
-            padding: 16,
-            borderRadius: 10,
-            border: '1px solid #e2e8f0',
-          }}
-        >
-          <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
-            Processing
-          </h3>
-          <ResponsiveContainer width="100%" height={180}>
-            <AreaChart data={cT}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="w" fontSize={12} stroke="#94a3b8" />
-              <YAxis fontSize={12} stroke="#94a3b8" />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Area
-                type="monotone"
-                dataKey="t"
-                stroke="#8b5cf6"
-                fill="rgba(139,92,246,0.1)"
-                strokeWidth={2}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-        <div
-          style={{
-            background: '#fff',
-            padding: 16,
-            borderRadius: 10,
-            border: '1px solid #e2e8f0',
-          }}
-        >
-          <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 12 }}>
-            Avg Days/Month
-          </h3>
-          <ResponsiveContainer width="100%" height={180}>
-            <BarChart data={cM}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-              <XAxis dataKey="m" fontSize={12} stroke="#94a3b8" />
-              <YAxis fontSize={12} stroke="#94a3b8" unit="d" />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Bar dataKey="avg" fill="#f59e0b" radius={[3, 3, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-      <div
-        style={{
-          background: '#fff',
-          padding: 16,
-          borderRadius: 10,
-          border: '1px solid #e2e8f0',
-        }}
-      >
-        <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 10 }}>
-          KPIs
-        </h3>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr>
-              {['Metric', 'Current', 'Target', 'Trend'].map((h) => (
-                <th
-                  key={h}
-                  style={{
-                    padding: '6px 10px',
-                    textAlign: 'left',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: '#64748b',
-                    textTransform: 'uppercase',
-                    borderBottom: '2px solid #e2e8f0',
-                  }}
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              { m: 'Avg Approval', c: '2.3d', t: '2.0d', r: '↓15%', g: 1 },
-              { m: '1st-Time Rate', c: '87%', t: '90%', r: '↑3%', g: 1 },
-              { m: 'SLA', c: '94.2%', t: '95%', r: '↑3.1%', g: 1 },
-              { m: 'Completion', c: '94%', t: '95%', r: '→0%', g: 0 },
-            ].map((r, i) => (
-              <tr key={i}>
-                <td
-                  style={{
-                    padding: '8px 10px',
-                    fontSize: 13,
-                    fontWeight: 600,
-                    borderBottom: '1px solid #f1f5f9',
-                  }}
-                >
-                  {r.m}
-                </td>
-                <td
-                  style={{
-                    padding: '8px 10px',
-                    fontSize: 13,
-                    borderBottom: '1px solid #f1f5f9',
-                  }}
-                >
-                  {r.c}
-                </td>
-                <td
-                  style={{
-                    padding: '8px 10px',
-                    fontSize: 13,
-                    borderBottom: '1px solid #f1f5f9',
-                    color: '#94a3b8',
-                  }}
-                >
-                  {r.t}
-                </td>
-                <td
-                  style={{
-                    padding: '8px 10px',
-                    fontSize: 13,
-                    borderBottom: '1px solid #f1f5f9',
-                    color: r.g ? '#10b981' : '#94a3b8',
-                    fontWeight: 600,
-                  }}
-                >
-                  {r.r}
-                </td>
-              </tr>
             ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-  const Sett = () => (
-    <div>
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.03em' }}>
-          Settings
-        </h1>
-        <p style={{ color: '#64748b', fontSize: 14, marginTop: 3 }}>
-          Configuration
-        </p>
-      </div>
-      <div style={{ display: 'flex', gap: 3, marginBottom: 16 }}>
-        {['users', 'security', 'integrations', 'system'].map((t) => (
-          <button
-            key={t}
-            onClick={() => setSTab(t)}
-            style={{
-              padding: '6px 13px',
-              background: sTab === t ? '#0f172a' : '#fff',
-              color: sTab === t ? '#fff' : '#64748b',
-              border: '1px solid #e2e8f0',
-              borderRadius: 6,
-              fontSize: 13,
-              fontWeight: 600,
-              cursor: 'pointer',
-              textTransform: 'capitalize',
-            }}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
-      {sTab === 'users' && (
-        <div
-          style={{
-            background: '#fff',
-            borderRadius: 10,
-            border: '1px solid #e2e8f0',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{ padding: '10px 14px', borderBottom: '1px solid #e2e8f0' }}
-          >
-            <b style={{ fontSize: 14 }}>{U.length} Users</b>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setEditingWf({
+                  ...editingWf,
+                  steps: [
+                    ...editingWf.steps,
+                    { r: 'New Role', a: 'Action', s: '24h' },
+                  ],
+                });
+              }}
+              style={{ ...bt('#fff', '#000'), fontSize: 12 }}
+            >
+              <Plus size={14} /> Add Step
+            </button>
           </div>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr>
-                {['User', 'Role', 'Dept', 'Status', ''].map((h) => (
-                  <th
-                    key={h}
-                    style={{
-                      padding: '6px 10px',
-                      textAlign: 'left',
-                      fontSize: 12,
-                      fontWeight: 700,
-                      color: '#64748b',
-                      borderBottom: '1px solid #e2e8f0',
-                      background: '#f8fafc',
-                    }}
-                  >
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {U.map((u) => (
-                <tr key={u.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                  <td style={{ padding: '7px 10px' }}>
-                    <div
-                      style={{ display: 'flex', alignItems: 'center', gap: 6 }}
-                    >
-                      <div
-                        style={{
-                          width: 24,
-                          height: 24,
-                          borderRadius: '50%',
-                          background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: '#fff',
-                          fontSize: 10,
-                          fontWeight: 700,
-                        }}
-                      >
-                        {u.name
-                          .split(' ')
-                          .map((n) => n[0])
-                          .join('')}
-                      </div>
-                      <div>
-                        <div style={{ fontSize: 13, fontWeight: 600 }}>
-                          {u.name}
-                        </div>
-                        <div style={{ fontSize: 11, color: '#94a3b8' }}>
-                          {u.email}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td style={{ padding: '7px 10px' }}>
-                    <span
-                      style={{
-                        padding: '2px 5px',
-                        borderRadius: 4,
-                        background: '#f1f5f9',
-                        fontWeight: 600,
-                        fontSize: 12,
-                        textTransform: 'capitalize',
-                      }}
-                    >
-                      {u.role}
-                    </span>
-                  </td>
-                  <td
-                    style={{
-                      padding: '7px 10px',
-                      fontSize: 13,
-                      color: '#64748b',
-                    }}
-                  >
-                    {u.dept}
-                  </td>
-                  <td style={{ padding: '7px 10px' }}>
-                    <span
-                      style={{
-                        fontSize: 12,
-                        fontWeight: 600,
-                        color: u.status === 'active' ? '#047857' : '#b91c1c',
-                      }}
-                    >
-                      {u.status === 'active' ? '●' : '○'} {u.status}
-                    </span>
-                  </td>
-                  <td style={{ padding: '7px 10px' }}>
-                    <button
-                      onClick={() => {
-                        setSelU(u);
-                        setModal('usr');
-                      }}
-                      style={{
-                        padding: '3px 7px',
-                        background: 'none',
-                        border: '1px solid #e2e8f0',
-                        borderRadius: 5,
-                        fontSize: 12,
-                        cursor: 'pointer',
-                        fontWeight: 600,
-                        color: '#3b82f6',
-                      }}
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-      {sTab === 'security' && (
-        <div
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}
-        >
-          {[
-            {
-              ic: <Lock size={16} />,
-              t: 'Password Policy',
-              d: 'Min 12 chars, MFA',
-              s: 'Enforced',
-            },
-            {
-              ic: <Shield size={16} />,
-              t: 'Audit Logging',
-              d: 'Full trail',
-              s: 'Active',
-            },
-            {
-              ic: <Globe size={16} />,
-              t: 'IP Allowlist',
-              d: 'Restrict by IP',
-              s: 'Configured',
-            },
-            {
-              ic: <Lock size={16} />,
-              t: 'Sessions',
-              d: '30-min timeout',
-              s: 'Active',
-            },
-          ].map((s, i) => (
-            <div
-              key={i}
-              style={{
-                background: '#fff',
-                padding: 14,
-                borderRadius: 10,
-                border: '1px solid #e2e8f0',
-                display: 'flex',
-                gap: 10,
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button onClick={updateWorkflow} style={bt('#10b981')}>
+              <Save size={16} /> Save Workflow
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setEditingWf(null);
+                setModal(selWf ? 'wf' : null);
               }}
+              style={bt('#fff', '#000')}
             >
-              <div
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: 8,
-                  background: '#eff6ff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#3b82f6',
-                  flexShrink: 0,
-                }}
-              >
-                {s.ic}
-              </div>
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 700 }}>{s.t}</div>
-                <div
-                  style={{ fontSize: 13, color: '#64748b', marginBottom: 3 }}
-                >
-                  {s.d}
-                </div>
-                <span
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    color: '#047857',
-                    background: '#ecfdf5',
-                    padding: '2px 5px',
-                    borderRadius: 4,
-                  }}
-                >
-                  {s.s}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      {sTab === 'integrations' && (
-        <div
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}
-        >
-          {[
-            { n: 'Oracle ERP', d: 'Financial sync', ok: 1 },
-            { n: 'SAP S/4HANA', d: 'Procurement', ok: 0 },
-            { n: 'Microsoft 365', d: 'Email & Calendar', ok: 1 },
-            { n: 'DocuSign', d: 'E-signatures', ok: 1 },
-          ].map((s, i) => (
-            <div
-              key={i}
-              style={{
-                background: '#fff',
-                padding: 14,
-                borderRadius: 10,
-                border: '1px solid #e2e8f0',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <div>
-                <div style={{ fontSize: 14, fontWeight: 700 }}>{s.n}</div>
-                <div style={{ fontSize: 13, color: '#64748b' }}>{s.d}</div>
-              </div>
-              <span
-                style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  padding: '3px 7px',
-                  borderRadius: 5,
-                  background: s.ok ? '#ecfdf5' : '#f1f5f9',
-                  color: s.ok ? '#047857' : '#64748b',
-                }}
-              >
-                {s.ok ? 'Connected' : 'Available'}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
-      {sTab === 'system' && (
-        <div
-          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}
-        >
-          {[
-            { t: 'Retention', v: '7 years', d: 'Auto-archive' },
-            { t: 'Notifications', v: 'Email + In-App', d: 'Per step' },
-            { t: 'Default SLA', v: '48 hours', d: 'Fallback' },
-            { t: 'Escalation', v: 'Enabled', d: 'After 2× SLA' },
-          ].map((s, i) => (
-            <div
-              key={i}
-              style={{
-                background: '#fff',
-                padding: 14,
-                borderRadius: 10,
-                border: '1px solid #e2e8f0',
-              }}
-            >
-              <div style={{ fontSize: 14, fontWeight: 700 }}>{s.t}</div>
-              <div style={{ fontSize: 13, color: '#64748b', marginBottom: 3 }}>
-                {s.d}
-              </div>
-              <span style={{ fontSize: 15, fontWeight: 700 }}>{s.v}</span>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-  // LAYOUT
-  const Sidebar = () => (
-    <div
-      style={{
-        width: sb ? 240 : 64,
-        background: '#0c1222',
-        color: '#fff',
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        height: '100vh',
-        transition: 'width 0.3s',
-        zIndex: 1000,
-        borderRight: '1px solid rgba(255,255,255,0.06)',
-      }}
-    >
-      <div
-        style={{
-          padding: sb ? '22px 18px' : '22px 12px',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 9,
-        }}
-      >
-        <div
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: 8,
-            background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-          }}
-        >
-          <Zap size={17} />
-        </div>
-        {sb && (
-          <span style={{ fontSize: 16, fontWeight: 800 }}>
-            Massy<span style={{ color: '#3b82f6' }}>Flow</span>
-          </span>
-        )}
-      </div>
-      <nav
-        style={{
-          flex: 1,
-          padding: '12px 0',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 1,
-        }}
-      >
-        {[
-          { k: 'dashboard', ic: <Home size={17} />, l: 'Dashboard' },
-          {
-            k: 'documents',
-            ic: <Folder size={17} />,
-            l: 'Documents',
-            b: st.pend,
-          },
-          { k: 'workflows', ic: <GitBranch size={17} />, l: 'Workflows' },
-          { k: 'analytics', ic: <BarChart3 size={17} />, l: 'Analytics' },
-          { k: 'settings', ic: <Settings size={17} />, l: 'Settings' },
-        ].map((i) => (
-          <button
-            key={i.k}
-            onClick={() => setVw(i.k)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 9,
-              padding: sb ? '9px 18px' : '9px 0',
-              justifyContent: sb ? 'flex-start' : 'center',
-              color: vw === i.k ? '#fff' : 'rgba(255,255,255,0.4)',
-              background: vw === i.k ? 'rgba(59,130,246,0.15)' : 'transparent',
-              border: 'none',
-              width: '100%',
-              cursor: 'pointer',
-              fontSize: 14,
-              fontWeight: vw === i.k ? 600 : 400,
-              borderLeft:
-                vw === i.k ? '3px solid #3b82f6' : '3px solid transparent',
-              transition: 'all 0.15s',
-            }}
-          >
-            {i.ic}
-            {sb && <span style={{ flex: 1, textAlign: 'left' }}>{i.l}</span>}
-            {sb && i.b > 0 && (
-              <span
-                style={{
-                  background: '#ef4444',
-                  color: '#fff',
-                  fontSize: 10,
-                  padding: '1px 5px',
-                  borderRadius: 9,
-                  fontWeight: 700,
-                }}
-              >
-                {i.b}
-              </span>
-            )}
-          </button>
-        ))}
-      </nav>
-      <div
-        style={{ padding: 12, borderTop: '1px solid rgba(255,255,255,0.06)' }}
-      >
-        {sb ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              <User size={15} />
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  whiteSpace: 'nowrap',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                {cu.name}
-              </div>
-              <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>
-                {cu.title}
-              </div>
-            </div>
+              Cancel
+            </button>
           </div>
-        ) : (
-          <div
-            style={{
-              width: 30,
-              height: 30,
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg,#3b82f6,#8b5cf6)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto',
-            }}
-          >
-            <User size={15} />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-  const Topbar = () => (
-    <div
-      style={{
-        background: '#fff',
-        height: 56,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 12,
-        padding: '0 20px',
-        borderBottom: '1px solid #e2e8f0',
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
-      }}
-    >
-      <button
-        onClick={() => setSb(!sb)}
-        style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: 5,
-          borderRadius: 6,
-          display: 'flex',
-        }}
-      >
-        {sb ? <X size={17} /> : <Menu size={17} />}
-      </button>
-      <div
-        style={{
-          flex: 1,
-          maxWidth: 400,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 7,
-          background: '#f1f5f9',
-          border: '1px solid #e2e8f0',
-          borderRadius: 7,
-          padding: '6px 10px',
-        }}
-      >
-        <Search size={15} color="#94a3b8" />
-        <input
-          type="text"
-          placeholder="Search..."
-          value={sq}
-          onChange={(e) => setSq(e.target.value)}
-          style={{
-            flex: 1,
-            border: 'none',
-            background: 'none',
-            outline: 'none',
-            fontSize: 14,
-          }}
-        />
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-        <select
-          value={cu.id}
-          onChange={(e) => {
-            const u = U.find((u) => u.id === e.target.value);
-            if (u) setCu(u);
-          }}
-          style={{
-            padding: '4px 7px',
-            border: '1px solid #e2e8f0',
-            borderRadius: 5,
-            fontSize: 12,
-            cursor: 'pointer',
-            maxWidth: 160,
-            color: '#475569',
-          }}
-        >
-          {U.map((u) => (
-            <option key={u.id} value={u.id}>
-              {u.name} ({u.role})
-            </option>
-          ))}
-        </select>
-        <div style={{ position: 'relative' }}>
-          <button
-            onClick={() => setShowN(!showN)}
-            style={{
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: 5,
-              borderRadius: 6,
-              display: 'flex',
-              position: 'relative',
-            }}
-          >
-            <Bell size={17} />
-            {notifs.filter((n) => !n.read).length > 0 && (
-              <span
-                style={{
-                  position: 'absolute',
-                  top: 1,
-                  right: 1,
-                  background: '#ef4444',
-                  color: '#fff',
-                  fontSize: 9,
-                  width: 15,
-                  height: 15,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 700,
-                }}
-              >
-                {notifs.filter((n) => !n.read).length}
-              </span>
-            )}
-          </button>
-          {showN && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '100%',
-                right: 0,
-                marginTop: 5,
-                width: 340,
-                background: '#fff',
-                borderRadius: 10,
-                boxShadow: '0 20px 40px -10px rgba(0,0,0,0.15)',
-                border: '1px solid #e2e8f0',
-                zIndex: 1000,
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  padding: '10px 14px',
-                  borderBottom: '1px solid #e2e8f0',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <b style={{ fontSize: 14 }}>Notifications</b>
-                <button
-                  onClick={() =>
-                    setNotifs((p) => p.map((n) => ({ ...n, read: true })))
-                  }
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    color: '#3b82f6',
-                    fontSize: 12,
-                    cursor: 'pointer',
-                  }}
-                >
-                  Read all
-                </button>
-              </div>
-              <div style={{ maxHeight: 300, overflowY: 'auto' }}>
-                {notifs.length === 0 ? (
-                  <div
-                    style={{
-                      padding: 24,
-                      textAlign: 'center',
-                      color: '#94a3b8',
-                    }}
-                  >
-                    None
-                  </div>
-                ) : (
-                  notifs.map((n) => (
-                    <div
-                      key={n.id}
-                      onClick={() =>
-                        setNotifs((p) =>
-                          p.map((x) =>
-                            x.id === n.id ? { ...x, read: true } : x
-                          )
-                        )
-                      }
-                      style={{
-                        padding: '8px 14px',
-                        borderBottom: '1px solid #f1f5f9',
-                        cursor: 'pointer',
-                        background: n.read ? '#fff' : 'rgba(59,130,246,0.03)',
-                        display: 'flex',
-                        gap: 8,
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: 5,
-                          height: 5,
-                          borderRadius: '50%',
-                          background: n.read ? 'transparent' : '#3b82f6',
-                          marginTop: 5,
-                          flexShrink: 0,
-                        }}
-                      />
-                      <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: 13, fontWeight: 600 }}>
-                          {n.title}
-                        </div>
-                        <div style={{ fontSize: 12, color: '#64748b' }}>
-                          {n.msg}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: 11,
-                            color: '#94a3b8',
-                            marginTop: 1,
-                          }}
-                        >
-                          {n.ts}
-                        </div>
-                      </div>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setNotifs((p) => p.filter((x) => x.id !== n.id));
-                        }}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          cursor: 'pointer',
-                          padding: 2,
-                        }}
-                      >
-                        <X size={12} color="#94a3b8" />
-                      </button>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  // ============================================================
+  // MAIN UI RENDER
+  // ============================================================
+
   return (
     <div
       style={{
         display: 'flex',
         minHeight: '100vh',
+        fontFamily: 'system-ui, -apple-system, sans-serif',
         background: '#f8fafc',
-        fontFamily: "'Inter',-apple-system,sans-serif",
-        color: '#0f172a',
       }}
     >
-      <Sidebar />
-      <div
-        style={{
-          flex: 1,
-          marginLeft: sb ? 240 : 64,
-          transition: 'margin 0.3s',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <Topbar />
-        <div style={{ flex: 1, padding: 28, overflowY: 'auto' }}>
-          {vw === 'dashboard' && <Dash />}
-          {vw === 'documents' && <Docs />}
-          {vw === 'workflows' && <WfV />}
-          {vw === 'analytics' && <Ana />}
-          {vw === 'settings' && <Sett />}
+      {sb && (
+        <div
+          style={{
+            width: 240,
+            background: '#1e293b',
+            color: '#fff',
+            padding: 20,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <div style={{ marginBottom: 32 }}>
+            <h1
+              style={{
+                margin: 0,
+                fontSize: 20,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+              }}
+            >
+              <Shield size={24} />
+              ApprovalHub
+            </h1>
+          </div>
+          <button
+            onClick={handleBackToModules}
+            style={{
+              ...bt('#fef2f2', '#ef4444'),
+              width: '100%',
+              marginBottom: 16,
+              fontSize: 12,
+              justifyContent: 'center',
+            }}
+          >
+            <Home size={14} /> Back to Modules
+          </button>
+          <nav style={{ flex: 1 }}>
+            {[
+              { id: 'dashboard', icon: Home, label: 'Dashboard' },
+              { id: 'documents', icon: FileText, label: 'Documents' },
+              { id: 'workflows', icon: GitBranch, label: 'Workflows' },
+              { id: 'analytics', icon: BarChart3, label: 'Analytics' },
+              { id: 'settings', icon: Settings, label: 'Settings' },
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setVw(item.id);
+                }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  width: '100%',
+                  padding: '12px 16px',
+                  marginBottom: 8,
+                  background: vw === item.id ? '#3b82f6' : 'transparent',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: 8,
+                  fontSize: 14,
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <item.icon size={18} />
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          <div style={{ paddingTop: 20, borderTop: '1px solid #334155' }}>
+            <div style={{ position: 'relative', marginBottom: 12 }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowUserMenu(!showUserMenu);
+                }}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  padding: '8px 12px',
+                  background: '#334155',
+                  border: 'none',
+                  borderRadius: 8,
+                  color: '#fff',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                <div
+                  style={{
+                    width: 36,
+                    height: 36,
+                    background: '#3b82f6',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 600,
+                    fontSize: 13,
+                  }}
+                >
+                  {cu.name
+                    .split(' ')
+                    .map((n) => n[0])
+                    .join('')}
+                </div>
+                <div style={{ flex: 1, textAlign: 'left' }}>
+                  <div style={{ fontSize: 13, fontWeight: 600 }}>
+                    {cu.name.split(' ')[0]}
+                  </div>
+                  <div style={{ fontSize: 11, color: '#94a3b8' }}>
+                    {cu.role}
+                  </div>
+                </div>
+                <ChevronDown size={16} style={{ color: '#94a3b8' }} />
+              </button>
+              {showUserMenu && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '100%',
+                    left: 0,
+                    right: 0,
+                    marginBottom: 8,
+                    background: '#fff',
+                    borderRadius: 8,
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+                    maxHeight: 400,
+                    overflow: 'auto',
+                    zIndex: 100,
+                  }}
+                >
+                  <div
+                    style={{ padding: 12, borderBottom: '1px solid #e2e8f0' }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 600,
+                        color: '#64748b',
+                        marginBottom: 8,
+                      }}
+                    >
+                      Switch User
+                    </div>
+                  </div>
+                  {U.map((user) => (
+                    <button
+                      key={user.id}
+                      onClick={(e) => switchUser(user.id, e)}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 12,
+                        padding: '10px 12px',
+                        background: cu.id === user.id ? '#eff6ff' : '#fff',
+                        border: 'none',
+                        borderBottom: '1px solid #f1f5f9',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'all 0.2s',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (cu.id !== user.id)
+                          e.currentTarget.style.background = '#f8fafc';
+                      }}
+                      onMouseLeave={(e) => {
+                        if (cu.id !== user.id)
+                          e.currentTarget.style.background = '#fff';
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: 32,
+                          height: 32,
+                          background: cu.id === user.id ? '#3b82f6' : '#94a3b8',
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 600,
+                          fontSize: 11,
+                          color: '#fff',
+                        }}
+                      >
+                        {user.name
+                          .split(' ')
+                          .map((n) => n[0])
+                          .join('')}
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <div
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: '#1e293b',
+                          }}
+                        >
+                          {user.name}
+                        </div>
+                        <div style={{ fontSize: 11, color: '#64748b' }}>
+                          {user.title} • {user.role}
+                        </div>
+                      </div>
+                      {cu.id === user.id && (
+                        <Check size={16} style={{ color: '#3b82f6' }} />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <button
+              onClick={resetData}
+              style={{ ...bt('#ef4444'), width: '100%', fontSize: 12 }}
+            >
+              <RefreshCw size={14} /> Reset Data
+            </button>
+          </div>
         </div>
+      )}
+
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <header
+          style={{
+            background: '#fff',
+            borderBottom: '1px solid #e2e8f0',
+            padding: '16px 24px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setSb(!sb);
+              }}
+              style={{ ...bt('#fff', '#000'), padding: 8 }}
+            >
+              <Menu size={20} />
+            </button>
+            <h2 style={{ margin: 0, fontSize: 18, color: '#1e293b' }}>
+              {vw.charAt(0).toUpperCase() + vw.slice(1)}
+            </h2>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div
+              style={{
+                padding: '6px 12px',
+                background: '#eff6ff',
+                borderRadius: 6,
+                fontSize: 12,
+                color: '#3b82f6',
+                fontWeight: 600,
+              }}
+            >
+              {cu.name} • {cu.title}
+            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setModal('create');
+              }}
+              style={bt('#3b82f6')}
+            >
+              <Plus size={16} /> New Document
+            </button>
+            <div style={{ position: 'relative' }}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowN(!showN);
+                }}
+                style={{
+                  ...bt('#fff', '#000'),
+                  padding: 8,
+                  position: 'relative',
+                }}
+              >
+                <Bell size={20} />
+                {notifs.filter((n) => !n.read).length > 0 && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: -4,
+                      right: -4,
+                      width: 18,
+                      height: 18,
+                      background: '#ef4444',
+                      color: '#fff',
+                      borderRadius: '50%',
+                      fontSize: 11,
+                      fontWeight: 600,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {notifs.filter((n) => !n.read).length}
+                  </span>
+                )}
+              </button>
+              {showN && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: '100%',
+                    marginTop: 8,
+                    width: 360,
+                    background: '#fff',
+                    borderRadius: 12,
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+                    maxHeight: 480,
+                    overflow: 'auto',
+                    zIndex: 100,
+                  }}
+                >
+                  <div
+                    style={{
+                      padding: 16,
+                      borderBottom: '1px solid #e2e8f0',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <h3 style={{ margin: 0, fontSize: 16 }}>Notifications</h3>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowN(false);
+                      }}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <X size={18} />
+                    </button>
+                  </div>
+                  {notifs.length === 0 ? (
+                    <div
+                      style={{
+                        padding: 24,
+                        textAlign: 'center',
+                        color: '#94a3b8',
+                      }}
+                    >
+                      No notifications
+                    </div>
+                  ) : (
+                    notifs.map((n) => (
+                      <div
+                        key={n.id}
+                        style={{
+                          padding: 16,
+                          borderBottom: '1px solid #e2e8f0',
+                          background: n.read ? '#fff' : '#eff6ff',
+                          cursor: 'pointer',
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setNotifs((p) =>
+                            p.map((x) =>
+                              x.id === n.id ? { ...x, read: true } : x
+                            )
+                          );
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'start',
+                            marginBottom: 4,
+                          }}
+                        >
+                          <span style={{ fontWeight: 600, fontSize: 14 }}>
+                            {n.title}
+                          </span>
+                          <span style={{ fontSize: 11, color: '#64748b' }}>
+                            {n.ts}
+                          </span>
+                        </div>
+                        <div style={{ fontSize: 13, color: '#64748b' }}>
+                          {n.msg}
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </header>
+
+        <main style={{ flex: 1, padding: 24, overflow: 'auto' }}>
+          {vw === 'dashboard' && (
+            <div>
+              <div style={{ marginBottom: 24 }}>
+                <h3 style={{ marginTop: 0, marginBottom: 8, fontSize: 20 }}>
+                  Welcome back, {cu.name.split(' ')[0]}!
+                </h3>
+                <p style={{ margin: 0, color: '#64748b' }}>
+                  Manage and approve documents efficiently across your
+                  organization
+                </p>
+              </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                  gap: 16,
+                  marginBottom: 32,
+                }}
+              >
+                {[
+                  {
+                    label: 'Pending Approval',
+                    value: st.pend,
+                    icon: Clock,
+                    color: '#f59e0b',
+                  },
+                  {
+                    label: 'In Progress',
+                    value: st.prog,
+                    icon: Activity,
+                    color: '#3b82f6',
+                  },
+                  {
+                    label: 'Completed',
+                    value: st.done,
+                    icon: CheckCircle,
+                    color: '#10b981',
+                  },
+                  {
+                    label: 'Total Documents',
+                    value: st.total,
+                    icon: FileText,
+                    color: '#8b5cf6',
+                  },
+                ].map((stat, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: '#fff',
+                      padding: 20,
+                      borderRadius: 12,
+                      border: '1px solid #e2e8f0',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'start',
+                        marginBottom: 12,
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: 13,
+                          color: '#64748b',
+                          fontWeight: 500,
+                        }}
+                      >
+                        {stat.label}
+                      </div>
+                      <stat.icon size={20} style={{ color: stat.color }} />
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 32,
+                        fontWeight: 700,
+                        color: '#1e293b',
+                      }}
+                    >
+                      {stat.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div
+                style={{
+                  background: '#fff',
+                  borderRadius: 12,
+                  border: '1px solid #e2e8f0',
+                  overflow: 'hidden',
+                }}
+              >
+                <div style={{ padding: 20, borderBottom: '1px solid #e2e8f0' }}>
+                  <h3 style={{ margin: 0, fontSize: 16 }}>Recent Documents</h3>
+                </div>
+                <div>
+                  {docs.slice(0, 6).map((d) => (
+                    <div
+                      key={d.id}
+                      style={{
+                        padding: 16,
+                        borderBottom: '1px solid #e2e8f0',
+                        cursor: 'pointer',
+                        transition: 'background 0.2s',
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSel(d);
+                        setModal('doc');
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = '#f8fafc';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = '#fff';
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <div style={{ flex: 1 }}>
+                          <div style={{ fontWeight: 600, marginBottom: 4 }}>
+                            {d.title}
+                          </div>
+                          <div style={{ fontSize: 13, color: '#64748b' }}>
+                            {d.id} • {d.by} • {d.at}
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 12,
+                          }}
+                        >
+                          {d.amt > 0 && (
+                            <span style={{ fontSize: 14, fontWeight: 600 }}>
+                              ${d.amt.toLocaleString()}
+                            </span>
+                          )}
+                          <SB s={d.status} />
+                          <PB p={d.pri} />
+                        </div>
+                      </div>
+                      {d.desc && (
+                        <div
+                          style={{
+                            fontSize: 13,
+                            color: '#64748b',
+                            marginTop: 8,
+                          }}
+                        >
+                          {d.desc.substring(0, 120)}...
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {vw === 'documents' && (
+            <div>
+              <div
+                style={{
+                  background: '#fff',
+                  padding: 20,
+                  borderRadius: 12,
+                  border: '1px solid #e2e8f0',
+                  marginBottom: 20,
+                }}
+              >
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '2fr 1fr 1fr 1fr',
+                    gap: 16,
+                  }}
+                >
+                  <div style={{ position: 'relative' }}>
+                    <Search
+                      size={18}
+                      style={{
+                        position: 'absolute',
+                        left: 12,
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        color: '#94a3b8',
+                      }}
+                    />
+                    <input
+                      type="text"
+                      value={sq}
+                      onChange={(e) => setSq(e.target.value)}
+                      placeholder="Search documents..."
+                      style={{ ...ii, paddingLeft: 40 }}
+                    />
+                  </div>
+                  <select
+                    value={fS}
+                    onChange={(e) => setFS(e.target.value)}
+                    style={si}
+                  >
+                    <option value="all">All Status</option>
+                    <option value="draft">Draft</option>
+                    <option value="pending">Pending</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
+                  <select
+                    value={fT}
+                    onChange={(e) => setFT(e.target.value)}
+                    style={si}
+                  >
+                    <option value="all">All Types</option>
+                    {DT.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={fD}
+                    onChange={(e) => setFD(e.target.value)}
+                    style={si}
+                  >
+                    <option value="all">All Departments</option>
+                    {DP.map((d) => (
+                      <option key={d} value={d}>
+                        {d}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div
+                style={{
+                  background: '#fff',
+                  borderRadius: 12,
+                  border: '1px solid #e2e8f0',
+                  overflow: 'hidden',
+                }}
+              >
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr
+                      style={{
+                        background: '#f8fafc',
+                        borderBottom: '2px solid #e2e8f0',
+                      }}
+                    >
+                      {[
+                        'ID',
+                        'Title',
+                        'Type',
+                        'Status',
+                        'Amount',
+                        'Priority',
+                        'Due Date',
+                        'Actions',
+                      ].map((h) => (
+                        <th
+                          key={h}
+                          style={{
+                            padding: 16,
+                            textAlign: 'left',
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: '#64748b',
+                          }}
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {fd.length === 0 ? (
+                      <tr>
+                        <td
+                          colSpan={8}
+                          style={{
+                            padding: 40,
+                            textAlign: 'center',
+                            color: '#94a3b8',
+                          }}
+                        >
+                          No documents found
+                        </td>
+                      </tr>
+                    ) : (
+                      fd.map((d) => (
+                        <tr
+                          key={d.id}
+                          style={{
+                            borderBottom: '1px solid #e2e8f0',
+                            cursor: 'pointer',
+                            transition: 'background 0.2s',
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSel(d);
+                            setModal('doc');
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = '#f8fafc';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = '#fff';
+                          }}
+                        >
+                          <td
+                            style={{
+                              padding: 16,
+                              fontSize: 13,
+                              fontWeight: 600,
+                            }}
+                          >
+                            {d.id}
+                          </td>
+                          <td style={{ padding: 16 }}>
+                            <div style={{ fontWeight: 600, marginBottom: 4 }}>
+                              {d.title}
+                            </div>
+                            <div style={{ fontSize: 12, color: '#64748b' }}>
+                              {d.by}
+                            </div>
+                          </td>
+                          <td style={{ padding: 16, fontSize: 13 }}>
+                            {d.type}
+                          </td>
+                          <td style={{ padding: 16 }}>
+                            <SB s={d.status} />
+                          </td>
+                          <td
+                            style={{
+                              padding: 16,
+                              fontSize: 14,
+                              fontWeight: 600,
+                            }}
+                          >
+                            {d.amt > 0 ? `$${d.amt.toLocaleString()}` : '-'}
+                          </td>
+                          <td style={{ padding: 16 }}>
+                            <PB p={d.pri} />
+                          </td>
+                          <td
+                            style={{
+                              padding: 16,
+                              fontSize: 13,
+                              color: '#64748b',
+                            }}
+                          >
+                            {d.due || '-'}
+                          </td>
+                          <td style={{ padding: 16 }}>
+                            <div style={{ display: 'flex', gap: 8 }}>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  expDoc(d, e);
+                                }}
+                                style={{
+                                  ...bt('#fff', '#000'),
+                                  padding: '6px 10px',
+                                  fontSize: 12,
+                                }}
+                              >
+                                <Download size={14} />
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  dupDoc(d, e);
+                                }}
+                                style={{
+                                  ...bt('#fff', '#000'),
+                                  padding: '6px 10px',
+                                  fontSize: 12,
+                                }}
+                              >
+                                <Copy size={14} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {vw === 'workflows' && (
+            <div>
+              <div
+                style={{
+                  marginBottom: 24,
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <div>
+                  <h3 style={{ marginTop: 0, marginBottom: 8, fontSize: 20 }}>
+                    Approval Workflows
+                  </h3>
+                  <p style={{ margin: 0, color: '#64748b' }}>
+                    Create and manage approval chains and routing rules
+                  </p>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    createWorkflow(e);
+                  }}
+                  style={bt('#10b981')}
+                >
+                  <Plus size={16} /> Create Workflow
+                </button>
+              </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                  gap: 20,
+                }}
+              >
+                {workflows.map((w) => (
+                  <div
+                    key={w.id}
+                    style={{
+                      background: '#fff',
+                      padding: 20,
+                      borderRadius: 12,
+                      border: '1px solid #e2e8f0',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelWf(w);
+                      setModal('wf');
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow =
+                        '0 8px 24px rgba(0,0,0,0.1)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'start',
+                        marginBottom: 12,
+                      }}
+                    >
+                      <h3 style={{ margin: 0, fontSize: 16 }}>{w.name}</h3>
+                      <span
+                        style={{
+                          padding: '4px 10px',
+                          background: w.on ? '#ecfdf5' : '#f1f5f9',
+                          color: w.on ? '#047857' : '#64748b',
+                          borderRadius: 6,
+                          fontSize: 11,
+                          fontWeight: 600,
+                        }}
+                      >
+                        {w.on ? 'Active' : 'Inactive'}
+                      </span>
+                    </div>
+                    <p
+                      style={{
+                        margin: 0,
+                        marginBottom: 16,
+                        fontSize: 13,
+                        color: '#64748b',
+                      }}
+                    >
+                      {w.desc}
+                    </p>
+                    <div
+                      style={{
+                        display: 'flex',
+                        gap: 8,
+                        marginBottom: 16,
+                        flexWrap: 'wrap',
+                      }}
+                    >
+                      {w.steps.slice(0, 3).map((s, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            flex: 1,
+                            minWidth: 60,
+                            padding: 8,
+                            background: '#f8fafc',
+                            borderRadius: 6,
+                            fontSize: 11,
+                            textAlign: 'center',
+                          }}
+                        >
+                          <div style={{ fontWeight: 600, marginBottom: 2 }}>
+                            {idx + 1}
+                          </div>
+                          <div style={{ color: '#64748b' }}>
+                            {s.r.split(' ')[0]}
+                          </div>
+                        </div>
+                      ))}
+                      {w.steps.length > 3 && (
+                        <div
+                          style={{
+                            width: 32,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#64748b',
+                            fontSize: 11,
+                          }}
+                        >
+                          +{w.steps.length - 3}
+                        </div>
+                      )}
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        paddingTop: 12,
+                        borderTop: '1px solid #e2e8f0',
+                        fontSize: 12,
+                      }}
+                    >
+                      <span style={{ color: '#64748b' }}>
+                        Processed: <strong>{w.n}</strong>
+                      </span>
+                      <span style={{ color: '#10b981', fontWeight: 600 }}>
+                        {w.rt}% success
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {vw === 'analytics' && (
+            <div>
+              <div style={{ marginBottom: 24 }}>
+                <h3 style={{ marginTop: 0, marginBottom: 8, fontSize: 20 }}>
+                  Performance Metrics
+                </h3>
+                <p style={{ margin: 0, color: '#64748b' }}>
+                  Track approval efficiency and organizational trends
+                </p>
+              </div>
+              <div style={{ display: 'grid', gap: 20, marginBottom: 20 }}>
+                <div
+                  style={{
+                    background: '#fff',
+                    padding: 24,
+                    borderRadius: 12,
+                    border: '1px solid #e2e8f0',
+                  }}
+                >
+                  <h3 style={{ marginTop: 0, marginBottom: 20, fontSize: 16 }}>
+                    Monthly Submission Trends
+                  </h3>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <AreaChart data={cM}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                      <XAxis dataKey="m" stroke="#64748b" />
+                      <YAxis stroke="#64748b" />
+                      <Tooltip />
+                      <Area
+                        type="monotone"
+                        dataKey="sub"
+                        stroke="#3b82f6"
+                        fill="#3b82f6"
+                        fillOpacity={0.2}
+                        name="Submitted"
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="app"
+                        stroke="#10b981"
+                        fill="#10b981"
+                        fillOpacity={0.2}
+                        name="Approved"
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="rej"
+                        stroke="#ef4444"
+                        fill="#ef4444"
+                        fillOpacity={0.2}
+                        name="Rejected"
+                      />
+                      <Legend />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: 20,
+                  }}
+                >
+                  <div
+                    style={{
+                      background: '#fff',
+                      padding: 24,
+                      borderRadius: 12,
+                      border: '1px solid #e2e8f0',
+                    }}
+                  >
+                    <h3
+                      style={{ marginTop: 0, marginBottom: 20, fontSize: 16 }}
+                    >
+                      By Department
+                    </h3>
+                    <ResponsiveContainer width="100%" height={250}>
+                      <PieChart>
+                        <Pie
+                          data={cD}
+                          dataKey="value"
+                          nameKey="name"
+                          cx="50%"
+                          cy="50%"
+                          outerRadius={80}
+                          label
+                        >
+                          {cD.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <div
+                    style={{
+                      background: '#fff',
+                      padding: 24,
+                      borderRadius: 12,
+                      border: '1px solid #e2e8f0',
+                    }}
+                  >
+                    <h3
+                      style={{ marginTop: 0, marginBottom: 20, fontSize: 16 }}
+                    >
+                      Processing Time Trend
+                    </h3>
+                    <ResponsiveContainer width="100%" height={250}>
+                      <LineChart data={cT}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                        <XAxis dataKey="w" stroke="#64748b" />
+                        <YAxis stroke="#64748b" />
+                        <Tooltip />
+                        <Line
+                          type="monotone"
+                          dataKey="t"
+                          stroke="#8b5cf6"
+                          strokeWidth={3}
+                          name="Avg Days"
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {vw === 'settings' && (
+            <div>
+              <div style={{ marginBottom: 24 }}>
+                <h3 style={{ marginTop: 0, marginBottom: 8, fontSize: 20 }}>
+                  System Configuration
+                </h3>
+                <p style={{ margin: 0, color: '#64748b' }}>
+                  Manage users, roles, and system settings
+                </p>
+              </div>
+              <div
+                style={{ borderBottom: '2px solid #e2e8f0', marginBottom: 24 }}
+              >
+                {[
+                  { id: 'users', label: 'Users', icon: Users },
+                  { id: 'roles', label: 'Roles', icon: Shield },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSTab(tab.id);
+                    }}
+                    style={{
+                      padding: '12px 20px',
+                      marginRight: 8,
+                      background: 'none',
+                      border: 'none',
+                      borderBottom:
+                        sTab === tab.id
+                          ? '2px solid #3b82f6'
+                          : '2px solid transparent',
+                      color: sTab === tab.id ? '#3b82f6' : '#64748b',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      position: 'relative',
+                      top: 2,
+                    }}
+                  >
+                    <tab.icon size={16} />
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+              {sTab === 'users' && (
+                <div
+                  style={{
+                    background: '#fff',
+                    borderRadius: 12,
+                    border: '1px solid #e2e8f0',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <thead>
+                      <tr
+                        style={{
+                          background: '#f8fafc',
+                          borderBottom: '2px solid #e2e8f0',
+                        }}
+                      >
+                        {['User', 'Email', 'Role', 'Department', 'Status'].map(
+                          (h) => (
+                            <th
+                              key={h}
+                              style={{
+                                padding: 16,
+                                textAlign: 'left',
+                                fontSize: 13,
+                                fontWeight: 600,
+                              }}
+                            >
+                              {h}
+                            </th>
+                          )
+                        )}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {U.map((u) => (
+                        <tr
+                          key={u.id}
+                          style={{ borderBottom: '1px solid #e2e8f0' }}
+                        >
+                          <td style={{ padding: 16 }}>
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 12,
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: 40,
+                                  height: 40,
+                                  background: '#3b82f6',
+                                  color: '#fff',
+                                  borderRadius: '50%',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  fontWeight: 600,
+                                  fontSize: 14,
+                                }}
+                              >
+                                {u.name
+                                  .split(' ')
+                                  .map((n) => n[0])
+                                  .join('')}
+                              </div>
+                              <div>
+                                <div style={{ fontWeight: 600 }}>{u.name}</div>
+                                <div style={{ fontSize: 12, color: '#64748b' }}>
+                                  {u.title}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td style={{ padding: 16, fontSize: 13 }}>
+                            {u.email}
+                          </td>
+                          <td style={{ padding: 16 }}>
+                            <span
+                              style={{
+                                padding: '4px 10px',
+                                background: '#f8fafc',
+                                borderRadius: 6,
+                                fontSize: 12,
+                                fontWeight: 600,
+                              }}
+                            >
+                              {u.role}
+                            </span>
+                          </td>
+                          <td style={{ padding: 16, fontSize: 13 }}>
+                            {u.dept}
+                          </td>
+                          <td style={{ padding: 16 }}>
+                            <span
+                              style={{
+                                color:
+                                  u.status === 'active' ? '#10b981' : '#94a3b8',
+                                fontSize: 20,
+                              }}
+                            >
+                              ●
+                            </span>
+                            <span style={{ marginLeft: 8, fontSize: 13 }}>
+                              {u.status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {sTab === 'roles' && (
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: 20,
+                  }}
+                >
+                  {[
+                    {
+                      name: 'Admin',
+                      desc: 'Full system access and configuration',
+                      count: U.filter((u) => u.role === 'admin').length,
+                      color: '#ef4444',
+                    },
+                    {
+                      name: 'Approver',
+                      desc: 'Can review and approve requests',
+                      count: U.filter((u) => u.role === 'approver').length,
+                      color: '#3b82f6',
+                    },
+                    {
+                      name: 'Requester',
+                      desc: 'Can submit and track requests',
+                      count: U.filter((u) => u.role === 'requester').length,
+                      color: '#10b981',
+                    },
+                  ].map((role) => (
+                    <div
+                      key={role.name}
+                      style={{
+                        background: '#fff',
+                        padding: 24,
+                        borderRadius: 12,
+                        border: '1px solid #e2e8f0',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: 48,
+                          height: 48,
+                          background: `${role.color}15`,
+                          color: role.color,
+                          borderRadius: 12,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          marginBottom: 16,
+                        }}
+                      >
+                        <Shield size={24} />
+                      </div>
+                      <h3 style={{ margin: 0, marginBottom: 8, fontSize: 18 }}>
+                        {role.name}
+                      </h3>
+                      <p
+                        style={{
+                          margin: 0,
+                          marginBottom: 16,
+                          fontSize: 13,
+                          color: '#64748b',
+                        }}
+                      >
+                        {role.desc}
+                      </p>
+                      <div
+                        style={{
+                          fontSize: 24,
+                          fontWeight: 700,
+                          color: role.color,
+                        }}
+                      >
+                        {role.count} users
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </main>
       </div>
+
       <DocModal />
       <SigModal />
+      <ReassignModal />
+      <ResubModal />
       <CreateModal />
-      <ReassignM />
-      <ResubM />
-      <WfM />
-      <UsrM />
+      <WfModal />
+      <EditWfModal />
     </div>
   );
 }
