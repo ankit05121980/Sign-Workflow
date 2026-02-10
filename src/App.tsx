@@ -1390,7 +1390,7 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                           letterSpacing: '0.5px',
                         }}
                       >
-                        Soon
+                        Inactive
                       </span>
                     )}
                   </div>
