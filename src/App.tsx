@@ -1070,15 +1070,15 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
     <div
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: '#ffffff',
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
       <header
         style={{
-          background: 'rgba(255,255,255,0.1)',
-          backdropFilter: 'blur(10px)',
-          borderBottom: '1px solid rgba(255,255,255,0.2)',
+          background: '#ffffff',
+          borderBottom: '1px solid #e2e8f0',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
         }}
       >
         <div
@@ -1096,14 +1096,14 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
               style={{
                 width: 48,
                 height: 48,
-                background: '#fff',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 borderRadius: 12,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <Building2 size={28} style={{ color: '#667eea' }} />
+              <Building2 size={28} style={{ color: '#fff' }} />
             </div>
             <div>
               <h1
@@ -1111,18 +1111,12 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                   margin: 0,
                   fontSize: 24,
                   fontWeight: 700,
-                  color: '#fff',
+                  color: '#1e293b',
                 }}
               >
                 Massy Enterprise Suite
               </h1>
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: 13,
-                  color: 'rgba(255,255,255,0.8)',
-                }}
-              >
+              <p style={{ margin: 0, fontSize: 13, color: '#64748b' }}>
                 Unified Business Management Platform
               </p>
             </div>
@@ -1131,21 +1125,15 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
             <div
               style={{
                 padding: '8px 16px',
-                background: 'rgba(255,255,255,0.2)',
+                background: '#f8fafc',
+                border: '1px solid #e2e8f0',
                 borderRadius: 8,
-                backdropFilter: 'blur(10px)',
               }}
             >
-              <div
-                style={{
-                  fontSize: 12,
-                  color: 'rgba(255,255,255,0.8)',
-                  marginBottom: 2,
-                }}
-              >
+              <div style={{ fontSize: 12, color: '#64748b', marginBottom: 2 }}>
                 Logged in as
               </div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: '#fff' }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: '#1e293b' }}>
                 {currentUser.name}
               </div>
             </div>
@@ -1153,7 +1141,7 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
               style={{
                 width: 44,
                 height: 44,
-                background: 'rgba(255,255,255,0.2)',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
@@ -1182,19 +1170,19 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
               marginBottom: 16,
               fontSize: 42,
               fontWeight: 700,
-              color: '#fff',
-              textShadow: '0 2px 20px rgba(0,0,0,0.2)',
+              color: '#0f172a',
+              letterSpacing: '-0.02em',
             }}
           >
             Enterprise Business Solutions
           </h2>
           <p
             style={{
-              margin: 0,
               fontSize: 18,
-              color: 'rgba(255,255,255,0.9)',
+              color: '#475569',
               maxWidth: 700,
               margin: '0 auto',
+              lineHeight: 1.6,
             }}
           >
             Streamline operations across your organization with our
@@ -1234,11 +1222,11 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
             <div
               key={idx}
               style={{
-                background: 'rgba(255,255,255,0.15)',
-                backdropFilter: 'blur(10px)',
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
                 borderRadius: 16,
                 padding: 24,
-                border: '1px solid rgba(255,255,255,0.2)',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
               }}
             >
               <div
@@ -1253,16 +1241,28 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                   style={{
                     fontSize: 13,
                     fontWeight: 600,
-                    color: 'rgba(255,255,255,0.8)',
+                    color: '#64748b',
                     textTransform: 'uppercase',
                     letterSpacing: '0.5px',
                   }}
                 >
                   {stat.label}
                 </div>
-                <stat.icon size={22} style={{ color: stat.color }} />
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    background: `${stat.color}10`,
+                    borderRadius: 10,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <stat.icon size={20} style={{ color: stat.color }} />
+                </div>
               </div>
-              <div style={{ fontSize: 36, fontWeight: 700, color: '#fff' }}>
+              <div style={{ fontSize: 36, fontWeight: 700, color: '#0f172a' }}>
                 {stat.value}
               </div>
             </div>
@@ -1274,7 +1274,7 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
             style={{
               fontSize: 20,
               fontWeight: 600,
-              color: '#fff',
+              color: '#1e293b',
               marginBottom: 24,
               textAlign: 'center',
             }}
@@ -1297,46 +1297,27 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                 onMouseEnter={() => setHoveredModule(module.id)}
                 onMouseLeave={() => setHoveredModule(null)}
                 style={{
-                  background:
-                    hoveredModule === module.id
-                      ? 'rgba(255,255,255,0.25)'
-                      : 'rgba(255,255,255,0.15)',
-                  backdropFilter: 'blur(10px)',
-                  borderRadius: 20,
-                  padding: 28,
+                  background: '#ffffff',
                   border:
-                    hoveredModule === module.id
-                      ? '2px solid rgba(255,255,255,0.4)'
-                      : '2px solid rgba(255,255,255,0.2)',
+                    hoveredModule === module.id && module.available
+                      ? '2px solid #667eea'
+                      : '1px solid #e2e8f0',
+                  borderRadius: 16,
+                  padding: 24,
                   cursor: module.available ? 'pointer' : 'not-allowed',
                   opacity: module.available ? 1 : 0.6,
                   transition: 'all 0.3s ease',
                   transform:
                     hoveredModule === module.id && module.available
-                      ? 'translateY(-4px) scale(1.02)'
-                      : 'translateY(0) scale(1)',
+                      ? 'translateY(-4px)'
+                      : 'translateY(0)',
                   boxShadow:
-                    hoveredModule === module.id
-                      ? '0 20px 60px rgba(0,0,0,0.3)'
-                      : '0 10px 30px rgba(0,0,0,0.2)',
+                    hoveredModule === module.id && module.available
+                      ? '0 12px 24px rgba(102, 126, 234, 0.15)'
+                      : '0 1px 3px rgba(0,0,0,0.05)',
                   position: 'relative',
-                  overflow: 'hidden',
                 }}
               >
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    width: '50%',
-                    height: '100%',
-                    background: module.gradient,
-                    opacity: 0.1,
-                    borderRadius: '50%',
-                    filter: 'blur(40px)',
-                    pointerEvents: 'none',
-                  }}
-                />
                 <div style={{ position: 'relative', zIndex: 1 }}>
                   <div
                     style={{
@@ -1352,22 +1333,28 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                         height: 56,
                         background: module.available
                           ? module.gradient
-                          : 'rgba(148,163,184,0.3)',
-                        borderRadius: 16,
+                          : '#f1f5f9',
+                        borderRadius: 14,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+                        boxShadow: module.available
+                          ? '0 4px 12px rgba(0,0,0,0.1)'
+                          : 'none',
                       }}
                     >
-                      <module.icon size={28} style={{ color: '#fff' }} />
+                      <module.icon
+                        size={28}
+                        style={{ color: module.available ? '#fff' : '#94a3b8' }}
+                      />
                     </div>
                     {module.available ? (
                       <span
                         style={{
                           padding: '6px 12px',
-                          background: '#10b981',
-                          color: '#fff',
+                          background: '#ecfdf5',
+                          color: '#059669',
+                          border: '1px solid #a7f3d0',
                           borderRadius: 8,
                           fontSize: 11,
                           fontWeight: 700,
@@ -1381,8 +1368,9 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                       <span
                         style={{
                           padding: '6px 12px',
-                          background: 'rgba(148,163,184,0.3)',
-                          color: 'rgba(255,255,255,0.8)',
+                          background: '#f8fafc',
+                          color: '#64748b',
+                          border: '1px solid #e2e8f0',
                           borderRadius: 8,
                           fontSize: 11,
                           fontWeight: 700,
@@ -1398,9 +1386,9 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                     style={{
                       margin: 0,
                       marginBottom: 10,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: 700,
-                      color: '#fff',
+                      color: '#0f172a',
                     }}
                   >
                     {module.name}
@@ -1410,7 +1398,7 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                       margin: 0,
                       marginBottom: 20,
                       fontSize: 14,
-                      color: 'rgba(255,255,255,0.85)',
+                      color: '#64748b',
                       lineHeight: 1.6,
                     }}
                   >
@@ -1421,21 +1409,27 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                       display: 'flex',
                       justifyContent: 'space-between',
                       paddingTop: 16,
-                      borderTop: '1px solid rgba(255,255,255,0.2)',
+                      borderTop: '1px solid #f1f5f9',
                     }}
                   >
                     <div>
                       <div
                         style={{
                           fontSize: 11,
-                          color: 'rgba(255,255,255,0.7)',
+                          color: '#94a3b8',
                           marginBottom: 4,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.5px',
                         }}
                       >
                         Active
                       </div>
                       <div
-                        style={{ fontSize: 18, fontWeight: 700, color: '#fff' }}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 700,
+                          color: '#1e293b',
+                        }}
                       >
                         {module.stats.active}
                       </div>
@@ -1444,14 +1438,20 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                       <div
                         style={{
                           fontSize: 11,
-                          color: 'rgba(255,255,255,0.7)',
+                          color: '#94a3b8',
                           marginBottom: 4,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.5px',
                         }}
                       >
                         Pending
                       </div>
                       <div
-                        style={{ fontSize: 18, fontWeight: 700, color: '#fff' }}
+                        style={{
+                          fontSize: 18,
+                          fontWeight: 700,
+                          color: '#1e293b',
+                        }}
                       >
                         {module.stats.pending}
                       </div>
@@ -1460,11 +1460,13 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                       <div
                         style={{
                           fontSize: 11,
-                          color: 'rgba(255,255,255,0.7)',
+                          color: '#94a3b8',
                           marginBottom: 4,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.5px',
                         }}
                       >
-                        Success Rate
+                        Success
                       </div>
                       <div
                         style={{
@@ -1484,7 +1486,7 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
                         display: 'flex',
                         alignItems: 'center',
                         gap: 8,
-                        color: '#fff',
+                        color: '#667eea',
                         fontSize: 14,
                         fontWeight: 600,
                       }}
@@ -1503,12 +1505,10 @@ const LandingScreen = ({ onModuleSelect, currentUser }) => {
             marginTop: 60,
             textAlign: 'center',
             padding: '30px 0',
-            borderTop: '1px solid rgba(255,255,255,0.2)',
+            borderTop: '1px solid #e2e8f0',
           }}
         >
-          <p
-            style={{ margin: 0, fontSize: 13, color: 'rgba(255,255,255,0.7)' }}
-          >
+          <p style={{ margin: 0, fontSize: 13, color: '#94a3b8' }}>
             © 2026 Massy Enterprise Suite. All rights reserved. | Version 2.5.0
             | <span style={{ color: '#10b981' }}>● System Operational</span>
           </p>
@@ -2097,6 +2097,15 @@ export default function App() {
     return () => ev.forEach(([e, h]) => c.removeEventListener(e, h));
   }, [modal]);
 
+  // Helper function to update workflow step without re-render issues
+  const updateWorkflowStep = (idx, field, value) => {
+    setEditingWf((prev) => {
+      const newSteps = [...prev.steps];
+      newSteps[idx] = { ...newSteps[idx], [field]: value };
+      return { ...prev, steps: newSteps };
+    });
+  };
+
   const clrSig = (e) => {
     if (e) {
       e.stopPropagation();
@@ -2364,7 +2373,7 @@ export default function App() {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      doApproval(d.id, false, e);
+                      setModal('reject');
                     }}
                     style={bt('#ef4444')}
                   >
@@ -2692,6 +2701,85 @@ export default function App() {
     );
   };
 
+  // Reject Modal
+  const RejectModal = () => {
+    if (!sel || modal !== 'reject') return null;
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0,0,0,0.4)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1001,
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setModal('doc');
+        }}
+      >
+        <div
+          style={{
+            background: '#fff',
+            borderRadius: 12,
+            padding: 24,
+            width: '90%',
+            maxWidth: 500,
+          }}
+        >
+          <h3 style={{ marginTop: 0 }}>Reject Document</h3>
+          <p style={{ color: '#64748b', marginBottom: 20 }}>
+            Reject <strong>{sel.id}</strong> — please provide a reason for
+            rejection.
+          </p>
+          <div style={{ marginBottom: 20 }}>
+            <label
+              style={{
+                display: 'block',
+                marginBottom: 8,
+                fontSize: 14,
+                fontWeight: 600,
+              }}
+            >
+              Rejection Reason *
+            </label>
+            <textarea
+              value={cmt}
+              onChange={(e) => setCmt(e.target.value)}
+              placeholder="Explain why this is being rejected..."
+              style={ii}
+            />
+          </div>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <button
+              onClick={(e) => {
+                if (!cmt) {
+                  alert('Please provide a rejection reason');
+                  return;
+                }
+                doApproval(sel.id, false, e);
+              }}
+              style={bt('#ef4444')}
+            >
+              <XCircle size={16} /> Confirm Rejection
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setCmt('');
+                setModal('doc');
+              }}
+              style={bt('#fff', '#000')}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Create Document Modal
   const CreateModal = () => {
     if (modal !== 'create') return null;
@@ -2798,7 +2886,7 @@ export default function App() {
                 value={nd.desc}
                 onChange={(e) => setNd({ ...nd, desc: e.target.value })}
                 placeholder="Describe the request..."
-                style={{ ...ii, minHeight: 80, resize: 'vertical' }}
+                style={ii}
               />
             </div>
             <div
@@ -3278,7 +3366,7 @@ export default function App() {
                 setEditingWf({ ...editingWf, desc: e.target.value })
               }
               placeholder="Describe the workflow..."
-              style={{ ...ii, minHeight: 80, resize: 'vertical' }}
+              style={ii}
             />
           </div>
           <div
@@ -3398,33 +3486,27 @@ export default function App() {
                   <input
                     type="text"
                     value={step.r}
-                    onChange={(e) => {
-                      const steps = [...editingWf.steps];
-                      steps[idx].r = e.target.value;
-                      setEditingWf({ ...editingWf, steps });
-                    }}
+                    onChange={(e) =>
+                      updateWorkflowStep(idx, 'r', e.target.value)
+                    }
                     placeholder="Role/Person"
                     style={ii}
                   />
                   <input
                     type="text"
                     value={step.a}
-                    onChange={(e) => {
-                      const steps = [...editingWf.steps];
-                      steps[idx].a = e.target.value;
-                      setEditingWf({ ...editingWf, steps });
-                    }}
+                    onChange={(e) =>
+                      updateWorkflowStep(idx, 'a', e.target.value)
+                    }
                     placeholder="Action"
                     style={ii}
                   />
                   <input
                     type="text"
                     value={step.s}
-                    onChange={(e) => {
-                      const steps = [...editingWf.steps];
-                      steps[idx].s = e.target.value;
-                      setEditingWf({ ...editingWf, steps });
-                    }}
+                    onChange={(e) =>
+                      updateWorkflowStep(idx, 's', e.target.value)
+                    }
                     placeholder="SLA"
                     style={ii}
                   />
@@ -3524,6 +3606,14 @@ export default function App() {
               { id: 'workflows', icon: GitBranch, label: 'Workflows' },
               { id: 'analytics', icon: BarChart3, label: 'Analytics' },
               { id: 'settings', icon: Settings, label: 'Settings' },
+              { id: 'archive', label: 'Archive', icon: Folder },
+              { id: 'in progress', label: 'In Progress', icon: Folder },
+              {
+                id: 'Pending Approval',
+                label: 'Pending Approval',
+                icon: Folder,
+              },
+              { id: 'Completed', label: 'Completed', icon: Folder },
             ].map((item) => (
               <button
                 key={item.id}
@@ -4824,6 +4914,7 @@ export default function App() {
       <SigModal />
       <ReassignModal />
       <ResubModal />
+      <RejectModal />
       <CreateModal />
       <WfModal />
       <EditWfModal />
